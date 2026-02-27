@@ -12,12 +12,15 @@
   scroll-behavior: smooth;
   
 }
+
 img{
   width: 100%;
 }
+
 body{
   color: var(--text-color);
 }
+
 header{
 position: fixed;
 width: 100%;
