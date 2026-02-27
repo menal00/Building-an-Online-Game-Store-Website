@@ -54,3 +54,18 @@ profile span{
   font-size: 13px;
   fontweight: 500;
 }
+
+.logo {
+display: flex;
+align-items: center; 
+  font-size: 1.1rem; 
+  font-weight: 600; 
+  color: var(--text-color); 
+  column-gap: 0.5rem;
+}
+
+.Logo .bx {
+font-size: 24px;
+color: var(--orange-color);
+}
+
