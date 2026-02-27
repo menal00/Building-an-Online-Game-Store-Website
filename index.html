@@ -8,6 +8,11 @@
 <title>Game Store Website</title>
  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+ 
 </head>
 <body>
 
@@ -21,7 +26,6 @@
 <li><a href="#aboutpage">About Page</a></li>
 <li><a href="#cartpage">Cart Page</a></li>
 <li><a href="#wishlistpage">Wishlist Page</a></li>
-  
 </ul>
   
  <div class="profile">
@@ -31,13 +35,46 @@
 </div>
   </header>
 
- <section class="home", id= "home">
-
-
+ <section class="home swiper", id= "home">
+ <div class="swiper-wrapper ">
+  <div class="swiper-slide container"> 
+  <div class="home-text"> 
+  <span> </span>
+  <h1></h1>
+  <a href="#" class="btn">Shop Now <i class='bx bx-right-arrow-alt' ></i> </a>
+  </div>  
+   <img src="images/home1.png" alt=""> 
+</div>
 
   
- </section>
+  <div class="swiper-slide container"> 
+  <div class="home-text"> 
+  <span> </span>
+  <h1></h1>
+  <a href="#" class="btn">Shop Now <i class='bx bx-right-arrow-alt' ></i> </a>
+  </div>  
+   <img src="images/home2.png" alt=""> 
+</div>
 
-   <script> src='script.js'</script>
+    <div class="swiper-slide container"> 
+  <div class="home-text"> 
+  <span> </span>
+  <h1></h1>
+  <a href="#" class="btn">Shop Now <i class='bx bx-right-arrow-alt' ></i> </a>
+  </div>  
+   <img src="images/home3.png" alt=""> 
+</div>
+</div>  
+
+  
+ <div class="swiper-button-next"> </div> 
+ <div class="swiper-button-prev"></div> 
+
+ </section>
+ 
+ <script> src="https://unpkg.com/swiper/swiper-bundle.min.js" </script>
+ <script> src='script.js'</script>
+
+ 
 </body> 
 </html>
