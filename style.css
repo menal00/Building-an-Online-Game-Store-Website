@@ -49,3 +49,8 @@ object-fit: cover;
 object-position: center;
 border-raduis: 50%;
 }
+
+profile span{
+  font-size: 13px;
+  fontweight: 500;
+}
