@@ -114,8 +114,9 @@ background-position: center;
 }
 
 .container img{
-width: 400px;
-position: absolute;
-  bottom: -500px; 
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   right: 200px;
 }
