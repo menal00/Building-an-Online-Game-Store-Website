@@ -12,6 +12,14 @@
   scroll-behavior: smooth;
   
 }
+:root {
+--green-color:#3cb815;
+--light-green-color: #c0eb7b;
+--orange-color: #ff7e00;
+--light-orange-color:#f75f1d;
+--text-color: #1a2428;
+-- bg-color: #fff;
+}
 
 img{
   width: 100%;
