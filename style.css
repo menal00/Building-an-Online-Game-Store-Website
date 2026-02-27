@@ -112,9 +112,9 @@ background-size: cover;
 background-position: center;
 }
 
-.container img {
-  width: 400px;
+.container img{
+  width: min(420px, 45vw);
   position: absolute;
-  bottom: -500px; 
-  right: 200px;
+  bottom: 0;
+  right: 5vw;
 }
