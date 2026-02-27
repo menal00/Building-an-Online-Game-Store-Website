@@ -1,10 +1,10 @@
 
-@import url('https://fonts.googleapis.com/css2?fomily=Poppins:wght@200; 300; 400; 500; 600; 700; 900&display =swap'):
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;900&display=swap');
 
-{
+*{
   font-family: 'poppins', sans-serif;
   margin: 0;
-  podding: 0;
+  padding: 0;
   box-sizing: broder-box;
   list-style: none;
   text-decoration: none; 
@@ -30,16 +30,17 @@ z-index: 1000;
 display: flex;
 align-items: center; 
 justify-content: space-between; 
-  background: var(--bg-color);
+background: var(--bg-color);
 box-shadow: 0 8px 11px rgb(14 55 54 / 15%);
-padding: 20px 100px; transition: 0.5s;
+padding: 20px 100px; 
+transition: 0.5s;
 }
 
 .profile {
 display: flex; 
-  align-items: center; 
-  column-gap: 0.5rem; 
-  cursor: pointer;
+align-items: center; 
+column-gap: 0.5rem; 
+cursor: pointer;
 }
 
 .profile img{
@@ -50,7 +51,7 @@ object-position: center;
 border-raduis: 50%;
 }
 
-profile span{
+.profile span{
   font-size: 13px;
   fontweight: 500;
 }
@@ -64,7 +65,7 @@ align-items: center;
   column-gap: 0.5rem;
 }
 
-.Logo .bx {
+.logo .bx {
 font-size: 24px;
 color: var(--orange-color);
 }
