@@ -40,8 +40,9 @@ align-items: center;
 justify-content: space-between; 
 background: var(--bg-color);
 box-shadow: 0 8px 11px rgb(14 55 54 / 15%);
-padding: 20px 100px; 
+padding: 20px 80px; 
 transition: 0.5s;
+flex-wrap: wrap;
 }
 
 .profile {
