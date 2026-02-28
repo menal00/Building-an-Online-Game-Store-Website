@@ -56,7 +56,7 @@ const games = [
     category: "Action",
     platform: "Console",
     description: "Futuristic combat and survival missions.",
-    image: "images/game4.png",
+    image: "images/game4.jpg",
     releaseDate: "2023-01-12",
     recommended: true
   },
