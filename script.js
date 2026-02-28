@@ -11,7 +11,9 @@ function showPage(pageId) {
 // Show home page when site loads
 document.addEventListener("DOMContentLoaded", function() {
   showPage('home');
+  displayRecommendedGames();
 });
+
 
 const games = [
   {
@@ -119,9 +121,4 @@ function displayRecommendedGames() {
       <p><strong>Rating:</strong> ⭐ ${game.rating}</p>
     </div>
   `).join("");
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  showPage('home');
-  displayRecommendedGames();
-});
+} );
