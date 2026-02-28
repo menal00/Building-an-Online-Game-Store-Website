@@ -172,3 +172,41 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
   emailInput.value = "";
 });
 
+document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const emailInput = document.getElementById("email");
+  const message = document.getElementById("formMessage");
+
+  const email = emailInput.value.trim();
+
+  // Clear previous classes
+  message.classList.remove("success", "error");
+
+  // Empty check
+  if (email === "") {
+    message.textContent = "Email cannot be empty.";
+    message.classList.add("error");
+    return;
+  }
+
+  // Proper email format check (professional way)
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailPattern.test(email)) {
+    message.textContent = "Please enter a valid email address.";
+    message.classList.add("error");
+    return;
+  }
+
+  // Success
+  message.textContent = "Successfully subscribed!";
+  message.classList.add("success");
+
+  emailInput.value = "";
+
+  // Remove message after 3 seconds
+  setTimeout(() => {
+    message.textContent = "";
+  }, 3000);
+});
