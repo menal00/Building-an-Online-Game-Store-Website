@@ -127,6 +127,21 @@ transition: background 0.5s;
   margin: 10px 0;
 }
 
+.hero {
+  position: relative;
+  text-align: center;
+}
+
+.carousel img {
+  width: 400px;
+  height: auto;
+}
+
+.carousel-controls {
+  margin-top: 10px;
+}
+
+
 .home-text p{
   font-size: 18px;
   line-height: 1.6;
