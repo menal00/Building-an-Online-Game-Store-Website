@@ -67,7 +67,7 @@ const games = [
     category: "RPG",
     platform: "PC",
     description: "Explore magical lands and creatures.",
-    image: "images/game5.png",
+    image: "images/game5.jpg",
     releaseDate: "2020-11-02",
     recommended: false
   },
@@ -78,7 +78,7 @@ const games = [
     category: "Racing",
     platform: "Console",
     description: "High-speed racing experience.",
-    image: "images/game6.png",
+    image: "images/game6.jpg",
     releaseDate: "2022-09-18",
     recommended: false
   },
@@ -89,7 +89,7 @@ const games = [
     category: "Action",
     platform: "PC",
     description: "Multiplayer competitive battle arena.",
-    image: "images/game7.png",
+    image: "images/game7.jpg",
     releaseDate: "2021-06-30",
     recommended: false
   },
@@ -100,7 +100,7 @@ const games = [
     category: "Puzzle",
     platform: "Mobile",
     description: "Challenge your brain with puzzles.",
-    image: "images/game8.png",
+    image: "images/game8.jpg",
     releaseDate: "2018-04-12",
     recommended: false
   }
