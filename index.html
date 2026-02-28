@@ -1,4 +1,4 @@
-<! DOCTYPE html> 
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,77 +7,58 @@
 
 <title>Game Store Website</title>
  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
  
 </head>
 <body>
 
   <header>
    
-<a href="#" class="logo"><i class='bx bxs-basket'></i>Game Center</a>
+<a href="#" class="logo">Game Center</a>
 
-<div class="bx bx-menu" id="menu-icon"></div>
-<ul class="navbar">
-<li><a href="#home" class="home-active">Hоmе</a></li>
-<li><a href="#gamespage">Games Page</a></li>
-<li><a href="#aboutpage">About Page</a></li>
-<li><a href="#cartpage">Cart Page</a></li>
-<li><a href="#wishlistpage">Wishlist Page</a></li>
-</ul>
+  <ul class="navbar">
+    <li><a href="#home" onclick="showPage('home')">Home</a></li>
+    <li><a href="#gamespage" onclick="showPage('gamespage')">Games</a></li>
+    <li><a href="#aboutpage" onclick="showPage('aboutpage')">About</a></li>
+    <li><a href="#cartpage" onclick="showPage('cartpage')">Cart</a></li>
+    <li><a href="#wishlistpage" onclick="showPage('wishlistpage')">Wishlist</a></li>
+  </ul>
   
  <div class="profile">
 <img src="images/profile.jpg" alt="">
 <span>Abdus Rahman</span>
-<i class='bx bx-caret-down' ></i>
 </div>
   </header>
-
- <section class="home swiper" id= "home">
   
- <div class="swiper-wrapper ">
-  <div class="swiper-slide container"> 
-  <div class="home-text"> 
-  <span>Only recommended for you</span>
-  <h1>MYTHIC HEROS </h1>
-   <p>An Epic AFK Idle RPG game!</p>
-  <a href="#" class="btn">Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
-  </div>  
-   <img src="images/home1.png" alt=""> 
-</div>
 
-  
-  <div class="swiper-slide container"> 
-  <div class="home-text"> 
-  <span>Only recommended for you</span>
-  <h1>TIME PRINCESS</h1>
-   <p>Time Princess invites you to return to 17th century Netherlands and experience the serene beauty of art!</p>
-  <a href="#" class="btn">Shop Now <i class='bx bx-right-arrow-alt' ></i> </a>
-  </div>  
-   <img src="images/home2.png" alt=""> 
-</div>
+<section class="page" id="home">
+  <h1>Home Page</h1>
+  <p>Welcome to Game Center!</p>
+ <div id="hero-container"></div>
+</section>
 
-    <div class="swiper-slide container"> 
-  <div class="home-text"> 
-  <span>Only recommended for you</span>
-  <h1>SSUBWAY SURFER</h1>
-   <p>Subway Surfers is a single player gaming and website developed by Kiloo</p>
-  <a href="#" class="btn">Shop Now <i class='bx bx-right-arrow-alt' ></i> </a>
-  </div>  
-   <img src="images/home3.png" alt=""> 
-</div>
-</div>  
+<section class="page" id="gamespage">
+  <h1>Games Page</h1>
+  <p>All available games here.</p>
+</section>
 
-  
- <div class="swiper-button-next"> </div> 
- <div class="swiper-button-prev"></div> 
+<section class="page" id="aboutpage">
+  <h1>About Page</h1>
+  <p>About our game store.</p>
+</section>
 
- </section>
+
+<section class="page" id="cartpage">
+  <h1>Cart Page</h1>
+  <p>Your selected items.</p>
+</section>
+
+<section class="page" id="wishlistpage">
+  <h1>Wishlist Page</h1>
+  <p>Your saved games.</p>
+</section>
+
+
  
- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
  <script src='script.js'></script>
 
  
