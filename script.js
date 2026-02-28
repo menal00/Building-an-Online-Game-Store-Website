@@ -122,3 +122,53 @@ function displayRecommendedGames() {
     </div>
   `).join("");
 } 
+
+let currentIndex = 0;
+
+function initCarousel() {
+  const recommended = games.filter(game => game.recommended);
+  const carousel = document.getElementById("carousel");
+
+  function renderSlide() {
+    const game = recommended[currentIndex];
+    carousel.innerHTML = `
+      <img src="${game.image}" alt="${game.title}">
+      <h2>${game.title}</h2>
+      <p>${game.description}</p>
+      <p>$${game.price}</p>
+    `;
+  }
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + recommended.length) % recommended.length;
+    renderSlide();
+  });
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % recommended.length;
+    renderSlide();
+  });
+
+  renderSlide();
+}
+document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const emailInput = document.getElementById("email");
+  const errorMessage = document.getElementById("error-message");
+
+  if (emailInput.value.trim() === "") {
+    errorMessage.textContent = "Email cannot be empty.";
+    return;
+  }
+
+  if (!emailInput.value.includes("@")) {
+    errorMessage.textContent = "Please enter a valid email address.";
+    return;
+  }
+
+  errorMessage.style.color = "green";
+  errorMessage.textContent = "Successfully subscribed!";
+  emailInput.value = "";
+});
+
