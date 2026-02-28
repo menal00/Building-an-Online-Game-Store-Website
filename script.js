@@ -1,9 +1,127 @@
-var swiper = new Swiper(".home", {
-  spaceBetween: 30,
-  centeredSlides: true,
-  loop: true,
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.page');
+
+  pages.forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(pageId).classList.add('active');
+}
+
+// Show home page when site loads
+document.addEventListener("DOMContentLoaded", function() {
+  showPage('home');
+});
+
+const games = [
+  {
+    title: "Mythic Heroes",
+    price: 29.99,
+    rating: 4.5,
+    category: "RPG",
+    platform: "PC",
+    description: "An epic AFK idle RPG adventure.",
+    image: "images/home1.png",
+    releaseDate: "2022-03-15",
+    recommended: true
   },
+  {
+    title: "Time Princess",
+    price: 19.99,
+    rating: 4.2,
+    category: "Adventure",
+    platform: "Mobile",
+    description: "Travel back to 17th century Netherlands.",
+    image: "images/home2.png",
+    releaseDate: "2021-07-10",
+    recommended: true
+  },
+  {
+    title: "Subway Surfers",
+    price: 9.99,
+    rating: 4.8,
+    category: "Action",
+    platform: "Mobile",
+    description: "Endless runner full of excitement.",
+    image: "images/home3.png",
+    releaseDate: "2019-05-20",
+    recommended: true
+  },
+  {
+    title: "Cyber Strike",
+    price: 49.99,
+    rating: 4.6,
+    category: "Action",
+    platform: "Console",
+    description: "Futuristic combat and survival missions.",
+    image: "images/game4.png",
+    releaseDate: "2023-01-12",
+    recommended: true
+  },
+  {
+    title: "Fantasy World",
+    price: 39.99,
+    rating: 4.3,
+    category: "RPG",
+    platform: "PC",
+    description: "Explore magical lands and creatures.",
+    image: "images/game5.png",
+    releaseDate: "2020-11-02",
+    recommended: false
+  },
+  {
+    title: "Racing Fever",
+    price: 24.99,
+    rating: 4.1,
+    category: "Racing",
+    platform: "Console",
+    description: "High-speed racing experience.",
+    image: "images/game6.png",
+    releaseDate: "2022-09-18",
+    recommended: false
+  },
+  {
+    title: "Battle Arena",
+    price: 34.99,
+    rating: 4.4,
+    category: "Action",
+    platform: "PC",
+    description: "Multiplayer competitive battle arena.",
+    image: "images/game7.png",
+    releaseDate: "2021-06-30",
+    recommended: false
+  },
+  {
+    title: "Puzzle Master",
+    price: 14.99,
+    rating: 4.0,
+    category: "Puzzle",
+    platform: "Mobile",
+    description: "Challenge your brain with puzzles.",
+    image: "images/game8.png",
+    releaseDate: "2018-04-12",
+    recommended: false
+  }
+];
+
+
+function displayRecommendedGames() {
+  const heroContainer = document.getElementById("hero-container");
+
+  const recommendedGames = games.filter(game => game.recommended);
+
+  heroContainer.innerHTML = recommendedGames.map(game => `
+    <div class="hero-game">
+      <img src="${game.image}" alt="${game.title}">
+      <h2>${game.title}</h2>
+      <p>${game.description}</p>
+      <p><strong>Price:</strong> $${game.price}</p>
+      <p><strong>Rating:</strong> ⭐ ${game.rating}</p>
+    </div>
+  `).join("");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  showPage('home');
+  displayRecommendedGames();
 });
