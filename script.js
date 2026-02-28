@@ -121,4 +121,4 @@ function displayRecommendedGames() {
       <p><strong>Rating:</strong> ⭐ ${game.rating}</p>
     </div>
   `).join("");
-} );
+} 
