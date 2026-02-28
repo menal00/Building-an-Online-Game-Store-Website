@@ -748,4 +748,15 @@ transition: background 0.5s;
     font-weight: 700;
 }
 
+#formMessage {
+  margin-top: 10px;
+  font-weight: 500;
+}
 
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
