@@ -488,6 +488,238 @@ const spinner = document.getElementById('loading-spinner');
     
     return false;
 }
+// GAMES PAGE FUNCTIONS 
+
+function applyFiltersAndSort() {
+    var categoryFilter = document.getElementById('category-filter');
+    var platformFilter = document.getElementById('platform-filter');
+    var priceFilter = document.getElementById('price-filter');
+    var sortSelect = document.getElementById('sort-select');
+    var searchInput = document.getElementById('search-input');
+    
+    var category = 'all';
+    var platform = 'all';
+    var maxPrice = '';
+    var sortBy = 'default';
+    var searchTerm = '';
+    
+    if (categoryFilter) {
+        category = categoryFilter.value;
+    }
+    if (platformFilter) {
+        platform = platformFilter.value;
+    }
+    if (priceFilter) {
+        maxPrice = priceFilter.value;
+    }
+    if (sortSelect) {
+        sortBy = sortSelect.value;
+    }
+    if (searchInput) {
+        searchTerm = searchInput.value;
+        var lowerSearch = '';
+        for (var s = 0; s < searchTerm.length; s++) {
+            var char = searchTerm.charAt(s);
+            if (char >= 'A' && char <= 'Z') {
+                lowerSearch = lowerSearch + String.fromCharCode(char.charCodeAt(0) + 32);
+            } else {
+                lowerSearch = lowerSearch + char;
+            }
+        }
+        searchTerm = lowerSearch;
+    }
+    var filteredGames = [];
+    for (var i = 0; i < games.length; i++) {
+        filteredGames[filteredGames.length] = games[i];
+    }
+    if (category !== 'all') {
+        var tempGames = [];
+        for (var i = 0; i < filteredGames.length; i++) {
+            if (filteredGames[i].category === category) {
+                tempGames[tempGames.length] = filteredGames[i];
+            }
+        }
+        filteredGames = tempGames;
+    }
+    if (platform !== 'all') {
+        var tempGames = [];
+        for (var i = 0; i < filteredGames.length; i++) {
+            if (filteredGames[i].platform === platform) {
+                tempGames[tempGames.length] = filteredGames[i];
+            }
+        }
+        filteredGames = tempGames;
+    }
+    if (maxPrice !== '') {
+        var price = 0;
+        // Convert string to number
+        for (var p = 0; p < maxPrice.length; p++) {
+            var digit = maxPrice.charAt(p);
+            if (digit >= '0' && digit <= '9') {
+                price = price * 10 + (digit.charCodeAt(0) - 48);
+            } else if (digit === '.') {
+                price = price + 0.01; 
+            }
+        }
+        
+        var tempGames = [];
+        for (var i = 0; i < filteredGames.length; i++) {
+            if (filteredGames[i].price <= price) {
+                tempGames[tempGames.length] = filteredGames[i];
+            }
+        }
+        filteredGames = tempGames;
+    }
+    if (searchTerm !== '') {
+        var tempGames = [];
+        for (var i = 0; i < filteredGames.length; i++) {
+            var title = filteredGames[i].title;
+            var lowerTitle = '';
+            for (var t = 0; t < title.length; t++) {
+                var char = title.charAt(t);
+                if (char >= 'A' && char <= 'Z') {
+                    lowerTitle = lowerTitle + String.fromCharCode(char.charCodeAt(0) + 32);
+                } else {
+                    lowerTitle = lowerTitle + char;
+                }
+            }
+            var desc = filteredGames[i].description;
+            var lowerDesc = '';
+            for (var d = 0; d < desc.length; d++) {
+                var char = desc.charAt(d);
+                if (char >= 'A' && char <= 'Z') {
+                    lowerDesc = lowerDesc + String.fromCharCode(char.charCodeAt(0) + 32);
+                } else {
+                    lowerDesc = lowerDesc + char;
+                }
+            }
+            var titleFound = false;
+            var descFound = false;
+            if (lowerTitle.length >= searchTerm.length) {
+                for (var t = 0; t <= lowerTitle.length - searchTerm.length; t++) {
+                    var match = true;
+                    for (var s = 0; s < searchTerm.length; s++) {
+                        if (lowerTitle.charAt(t + s) !== searchTerm.charAt(s)) {
+                            match = false;
+                            break;
+                        }
+                    }
+                    if (match) {
+                        titleFound = true;
+                        break;
+                    }
+                }
+            }
+            if (lowerDesc.length >= searchTerm.length) {
+                for (var d = 0; d <= lowerDesc.length - searchTerm.length; d++) {
+                    var match = true;
+                    for (var s = 0; s < searchTerm.length; s++) {
+                        if (lowerDesc.charAt(d + s) !== searchTerm.charAt(s)) {
+                            match = false;
+                            break;
+                        }
+                    }
+                    if (match) {
+                        descFound = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (titleFound || descFound) {
+                tempGames[tempGames.length] = filteredGames[i];
+            }
+        }
+        filteredGames = tempGames;
+    }
+    if (sortBy === 'price-asc') {
+        for (var i = 0; i < filteredGames.length - 1; i++) {
+            for (var j = 0; j < filteredGames.length - i - 1; j++) {
+                if (filteredGames[j].price > filteredGames[j + 1].price) {
+                    var temp = filteredGames[j];
+                    filteredGames[j] = filteredGames[j + 1];
+                    filteredGames[j + 1] = temp;
+                }
+            }
+        }
+    } else if (sortBy === 'price-desc') {
+        for (var i = 0; i < filteredGames.length - 1; i++) {
+            for (var j = 0; j < filteredGames.length - i - 1; j++) {
+                if (filteredGames[j].price < filteredGames[j + 1].price) {
+                    var temp = filteredGames[j];
+                    filteredGames[j] = filteredGames[j + 1];
+                    filteredGames[j + 1] = temp;
+                }
+            }
+        }
+    } else if (sortBy === 'rating-desc') {
+        for (var i = 0; i < filteredGames.length - 1; i++) {
+            for (var j = 0; j < filteredGames.length - i - 1; j++) {
+                if (filteredGames[j].rating < filteredGames[j + 1].rating) {
+                    var temp = filteredGames[j];
+                    filteredGames[j] = filteredGames[j + 1];
+                    filteredGames[j + 1] = temp;
+                }
+            }
+        }
+    } else if (sortBy === 'name-asc') {
+        for (var i = 0; i < filteredGames.length - 1; i++) {
+            for (var j = 0; j < filteredGames.length - i - 1; j++) {
+                if (filteredGames[j].title > filteredGames[j + 1].title) {
+                    var temp = filteredGames[j];
+                    filteredGames[j] = filteredGames[j + 1];
+                    filteredGames[j + 1] = temp;
+                }
+            }
+        }
+    }
+    displayGamesInContainer(filteredGames);
+}
+
+function displayGamesInContainer(gamesToShow) {
+    var container = document.getElementById('games-container');
+    if (!container) return;
+    
+    var html = '';
+    
+    if (gamesToShow.length === 0) {
+        html = '<p class="no-results">No games match your filters.</p>';
+    } else {
+        for (var i = 0; i < gamesToShow.length; i++) {
+            var game = gamesToShow[i];
+            html = html + '<div class="game-card">';
+            html = html + '<img src="' + game.image + '" alt="' + game.title + '">';
+            html = html + '<div class="game-info">';
+            html = html + '<h3>' + game.title + '</h3>';
+            html = html + '<p class="rating">Rating: ' + game.rating + ' ★</p>';
+            html = html + '<p class="category">' + game.category + ' | ' + game.platform + '</p>';
+            html = html + '<p class="price">$' + game.price + '</p>';
+            html = html + '<div class="actions">';
+            html = html + '<button class="btn-cart" onclick="addToCart(' + game.id + ')">Add to Cart</button>';
+            html = html + '<button class="btn-wish" onclick="addToWishlist(' + game.id + ')">Add to Wishlist</button>';
+            html = html + '</div>';
+            html = html + '</div>';
+            html = html + '</div>';
+        }
+    }
+    
+    container.innerHTML = html;
+}
+function setView(viewType) {
+    var container = document.getElementById('games-container');
+    var gridBtn = document.getElementById('grid-view-btn');
+    var listBtn = document.getElementById('list-view-btn');
+    
+    if (viewType === 'grid') {
+        container.className = 'games-container';
+        gridBtn.className = 'view-btn active-view';
+        listBtn.className = 'view-btn';
+    } else {
+        container.className = 'games-container list-view';
+        listBtn.className = 'view-btn active-view';
+        gridBtn.className = 'view-btn';
+    }
+}
   
    
 
