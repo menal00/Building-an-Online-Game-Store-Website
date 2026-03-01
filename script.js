@@ -320,8 +320,9 @@ function updateCartBadge() {
 }
 
 function findGameById(gameId) {
+  gameId = Number(gameId);
   for (var i = 0; i < games.length; i++) {
-    if (games[i].id === gameId) return games[i];
+    if (Number(games[i].id) === gameId) return games[i];
   }
   return null;
 }
@@ -661,8 +662,8 @@ function displayGamesInContainer(gamesToShow) {
             html = html + '<p class="category">' + game.category + ' | ' + game.platform + '</p>';
             html = html + '<p class="price">$' + game.price + '</p>';
             html = html + '<div class="actions">';
-            html = html + '<button class="btn-cart" onclick="addToCart(' + game.id + ')">Add to Cart</button>';
-            html = html + '<button class="btn-wish" onclick="addToWishlist(' + game.id + ')">Add to Wishlist</button>';
+            html = html + '<button class="btn-cart" onclick="addToCart(' + Number(game.id) + ')">Add to Cart</button>';
+            html = html + '<button class="btn-wish" onclick="addToWishlist(' + Number(game.id) + ')">Add to Wishlist</button>';
             html = html + '</div>';
             html = html + '</div>';
             html = html + '</div>';
