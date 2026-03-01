@@ -1007,38 +1007,80 @@ function validatePaymentForm(event) {
 }
 
 function processPayment() {
-    // Show loading spinner
-    var spinner = document.getElementById('loading-spinner');
-    spinner.className = 'loading-spinner';
-    setTimeout(function() {
-        spinner.className = 'loading-spinner hidden';
-        var date = new Date();
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        var monthStr = '' + month;
-        if (month < 10) {
-            monthStr = '0' + month;
-        }
-        
-        var dayStr = '' + day;
-        if (day < 10) {
-            dayStr = '0' + day;
-        }
-        var randomNum = '';
-        for (var i = 0; i < 4; i++) {
-            randomNum = randomNum + Math.floor(Math.random() * 10);
-        }
-        var orderNumber = 'ORD-' + year + monthStr + dayStr + '-' + randomNum;
-        var email = document.getElementById('checkout-email').value;
-        alert('Order placed successfully!\nOrder Number: ' + orderNumber);
-        document.getElementById('paymentForm').reset();
-        showPage('gamespage');
-        
-    }, 2000);
+  var spinner = document.getElementById('loading-spinner');
+  spinner.className = 'loading-spinner';
+
+  setTimeout(function() {
+
+    spinner.className = 'loading-spinner hidden';
+
+    var date = new Date();
+
+    // ORDER NUMBER FORMAT: ORD-YYYYMMDD-####
+    var yyyy = date.getFullYear();
+    var mm = String(date.getMonth() + 1).padStart(2, '0');
+    var dd = String(date.getDate()).padStart(2, '0');
+    var randomNum = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+    var orderNumber = 'ORD-' + yyyy + mm + dd + '-' + randomNum;
+
+    // DATE FORMAT: DD/MM/YYYY
+    var orderDate = dd + '/' + mm + '/' + yyyy;
+
+    var email = document.getElementById('checkout-email').value;
+
+    // calculate totals
+    var subtotal = calculateCartSubtotal();
+    var tax = subtotal * 0.13;
+    var total = subtotal + tax;
+
+    renderReceipt(orderNumber, orderDate, email, subtotal, tax, total);
+
+    clearCart();
+    showPage('receiptpage');
+
+  }, 1500);
 }
 
- 
+ function renderReceipt(orderNumber, orderDate, email, subtotal, tax, total) {
+
+  document.getElementById('r-order-number').textContent = orderNumber;
+  document.getElementById('r-order-date').textContent = orderDate;
+  document.getElementById('r-email').textContent = email;
+
+  var itemsContainer = document.getElementById('r-items');
+  itemsContainer.innerHTML = '';
+
+  for (var i = 0; i < cartItems.length; i++) {
+    var item = cartItems[i];
+
+    var row = document.createElement('div');
+    row.className = 'summary-row';
+    row.innerHTML =
+      '<span>' + item.title + ' × ' + item.quantity + '</span>' +
+      '<span>$' + (item.price * item.quantity).toFixed(2) + '</span>';
+
+    itemsContainer.appendChild(row);
+  }
+
+  document.getElementById('r-subtotal').textContent = '$' + subtotal.toFixed(2);
+  document.getElementById('r-tax').textContent = '$' + tax.toFixed(2);
+  document.getElementById('r-total').textContent = '$' + total.toFixed(2);
+}
+
+function calculateCartSubtotal() {
+  var subtotal = 0;
+  for (var i = 0; i < cartItems.length; i++) {
+    subtotal += cartItems[i].price * cartItems[i].quantity;
+  }
+  return subtotal;
+}
+
+function clearCart() {
+  cartItems = [];
+  saveCart();
+  updateCartBadge();
+  displayCart();
+}
 
 
   
