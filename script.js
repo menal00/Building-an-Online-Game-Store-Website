@@ -1048,15 +1048,13 @@ function processPayment() {
   }, 1500);
 }
 
- function calculateCartSubtotal() {
+function calculateCartSubtotal() {
   var subtotal = 0;
 
   for (var i = 0; i < cartItems.length; i++) {
     var it = cartItems[i];
-    var game = findGameById(it.id); // you already have findGameById from cart code
-    if (game) {
-      subtotal += game.price * it.qty;
-    }
+    var game = findGameById(it.id);
+    if (game) subtotal += game.price * it.qty;
   }
 
   return subtotal;
@@ -1070,6 +1068,7 @@ function renderReceipt(orderNumber, orderDate, email, subtotal, tax, total) {
   var itemsContainer = document.getElementById('r-items');
   itemsContainer.innerHTML = '';
 
+  // cartItems is: [{id, qty}]
   for (var i = 0; i < cartItems.length; i++) {
     var it = cartItems[i];
     var game = findGameById(it.id);
