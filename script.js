@@ -720,6 +720,64 @@ function setView(viewType) {
         gridBtn.className = 'view-btn';
     }
 }
+// ABOUT PAGE FUNCTIONS
+function validateContactForm(event) {
+    if (event) {
+        event.preventDefault();
+    }
+    var nameInput = document.getElementById('contact-name');
+    var emailInput = document.getElementById('contact-email');
+    var messageInput = document.getElementById('contact-message');
+    
+    var name = nameInput.value;
+    var email = emailInput.value;
+    var message = messageInput.value;
+    
+    var nameError = document.getElementById('name-error');
+    var emailError = document.getElementById('email-error');
+    var messageError = document.getElementById('message-error');
+    
+    nameError.innerHTML = '';
+    emailError.innerHTML = '';
+    messageError.innerHTML = '';
+    
+    var isValid = true;
+    
+    if (name === '') {
+        nameError.innerHTML = 'Name cannot be empty.';
+        isValid = false;
+    }
+    
+    if (email === '') {
+        emailError.innerHTML = 'Email cannot be empty.';
+        isValid = false;
+    } else {
+        var hasAtSymbol = false;
+        for (var i = 0; i < email.length; i++) {
+            if (email.charAt(i) === '@') {
+                hasAtSymbol = true;
+                break;
+            }
+        }
+        if (!hasAtSymbol) {
+            emailError.innerHTML = 'Email must contain @ symbol.';
+            isValid = false;
+        }
+    }
+    if (message === '') {
+        messageError.innerHTML = 'Please enter Email.';
+        isValid = false;
+    }
+
+    if (isValid) {
+        alert('Message sent successfully!');
+        nameInput.value = '';
+        emailInput.value = '';
+        messageInput.value = '';
+    }
+    
+    return false;
+
   
    
 
