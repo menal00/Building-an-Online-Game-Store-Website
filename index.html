@@ -99,6 +99,50 @@
         </div>
 </section>
 
+ <section class="page" id="gamedetailpage">
+  <button class="back-btn" onclick="showPage('gamespage')">← Back to Games</button>
+
+  <div class="detail-layout">
+    <!-- Left: main image + thumbnails -->
+    <div class="detail-left">
+      <img id="detail-main-image" class="detail-main-image" src="" alt="Game Image">
+
+      <div class="thumb-row" id="detail-thumbnails">
+        <!-- JS will populate 4 thumbnails -->
+      </div>
+    </div>
+
+    <!-- Right: title, specs, actions -->
+    <div class="detail-right">
+      <h1 id="detail-title">Game Title</h1>
+      <p id="detail-description">Game description...</p>
+
+      <div class="specs-card">
+        <div><strong>Type:</strong> <span id="detail-category"></span></div>
+        <div><strong>Platform:</strong> <span id="detail-platform"></span></div>
+        <div><strong>Release Date:</strong> <span id="detail-release"></span></div>
+        <div><strong>Rating:</strong> <span id="detail-rating"></span></div>
+        <div><strong>Price:</strong> $<span id="detail-price"></span></div>
+      </div>
+
+      <div class="detail-actions">
+        <button class="btn-cart" id="detail-add-cart-btn">Add to Cart</button>
+        <button class="btn-wish" id="detail-add-wish-btn">Add to Wishlist</button>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Screenshots</h2>
+  <div class="screens-grid" id="detail-screenshots">
+    <!-- JS will populate 4 screenshots -->
+  </div>
+
+  <h2 class="section-title">Reviews</h2>
+  <div class="reviews" id="detail-reviews">
+    <!-- JS will populate reviews -->
+  </div>
+</section>
+
 <section class="page" id="aboutpage">
   <h1>About our game store</h1>
            <!-- Store Description -->
@@ -118,7 +162,7 @@
                        
             <p style="margin-top: 1.5rem;"><strong>Happy Gaming!</strong><br>
             <span style="color: #ff9f1c;">🎮 The Game Center Team</span></p>
-        </div>
+      
         
         <!-- Contact Form  -->
         <div class="contact-form">
@@ -153,6 +197,16 @@
 
 <section class="page" id="cartpage">
   <h1>Your selected items</h1>
+  <div id="cart-container" class="cart-container"></div>
+
+  <div class="cart-summary">
+    <div class="summary-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+    <div class="summary-row"><span>Tax (13%)</span><span id="cart-tax">$0.00</span></div>
+    <div class="summary-row total"><span>Total</span><span id="cart-total">$0.00</span></div>
+
+    <button class="place-order-btn" onclick="showPage('checkoutpage')">Proceed to Checkout →</button>
+  </div>
+</section>
 </section>
 
 <section class="page" id="wishlistpage">
@@ -164,7 +218,7 @@
     <section class="page" id="checkoutpage">
         <h1>Checkout</h1>
         <div class="checkout-container">
-            <form id="paymentForm" onsubmit="return validatePaymentForm(event)">
+            <form id="paymentForm" class="payment-form", onsubmit="return validatePaymentForm(event)">
                 <fieldset>
                     <legend>Personal Information</legend>
                     
@@ -220,7 +274,34 @@
         </div>
     </section>
 
- <script src='script.js'></script>
+<section class="page" id="receiptpage">
+  <h1>Receipt</h1>
+
+  <div class="receipt" id="receipt-area">
+    <div class="receipt-header">
+      <h2>Game Center</h2>
+      <p><strong>Order Number:</strong> <span id="r-order-number"></span></p>
+      <p><strong>Order Date:</strong> <span id="r-order-date"></span></p>
+      <p><strong>Email:</strong> <span id="r-email"></span></p>
+    </div>
+
+    <div class="receipt-items">
+      <h3>Order Items</h3>
+      <div id="r-items"></div>
+    </div>
+
+    <div class="receipt-totals">
+      <div class="summary-row"><span>Subtotal</span><span id="r-subtotal"></span></div>
+      <div class="summary-row"><span>Tax (13%)</span><span id="r-tax"></span></div>
+      <div class="summary-row total"><span>Total</span><span id="r-total"></span></div>
+    </div>
+  </div>
+
+  <div class="receipt-actions">
+    <button class="view-btn" onclick="showPage('home')">Continue Shopping</button>
+    <button class="view-btn active-view" onclick="window.print()">Print / Save PDF</button>
+  </div>
+</section>
  
 <footer>
   <h3>Subscribe to our Newsletter</h3>
@@ -233,6 +314,6 @@
   <p id="formMessage"></p>
 </footer>
 
- 
+  <script src='script.js'></script>
 </body> 
 </html>
