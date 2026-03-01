@@ -1016,3 +1016,9 @@ footer button:hover {
   background: #ff9f1c;
   color: #0a0f1c;
 }
+
+.hero-controls{
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.8rem;
+}
