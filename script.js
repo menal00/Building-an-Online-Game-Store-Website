@@ -220,7 +220,7 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
   }, 3000);
 });
 
-// WISHLIST PAGE FUNCTIONS - YOUR CODE
+// WISHLIST PAGE FUNCTIONS 
 var wishlistItems = [];
 
 function addToWishlist(gameId) {
@@ -302,51 +302,7 @@ function removeFromWishlist(gameId) {
     displayWishlist();
     alert('Item removed from wishlist!');
 }
-function processPayment(event) {
-    event.preventDefault();
-    
-    const email = document.getElementById('checkout-email').value;
-    const cardName = document.getElementById('card-name').value;
-    const cardNumber = document.getElementById('card-number').value;
-    const expiry = document.getElementById('expiry').value;
-    const cvv = document.getElementById('cvv').value;
-    
-    if (!email || !cardName || !cardNumber || !expiry || !cvv) {
-        alert('Please fill in all fields');
-        return false;
-    }
-    
-    if (cardNumber.length !== 16) {
-        alert('Card number must be 16 digits');
-        return false;
-    }
-  
-    const spinner = document.getElementById('loading-spinner');
-    spinner.style.display = 'block';
 
-    setTimeout(function() {
-        spinner.style.display = 'none';
-        
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        
-        let randomNum = '';
-        for (let i = 0; i < 4; i++) {
-            randomNum = randomNum + Math.floor(Math.random() * 10);
-        }
-        
-        const orderNumber = 'ORD-' + year + month + day + '-' + randomNum;
-        
-        alert('Order placed! Order Number: ' + orderNumber);
-        
-        document.getElementById('paymentForm').reset();
-        showPage('games-page');
-    }, 2000);
-    
-    return false;
-}
 
 function updateWishlistBadge() {
     const badge = document.getElementById('wishlist-count');
