@@ -1,13 +1,12 @@
 <!DOCTYPE html> 
 <html lang="en">
+ 
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Game Store Website</title>
  <link rel="stylesheet" href="style.css">
- 
 </head>
 <body>
 
@@ -19,8 +18,8 @@
     <li><a href="#home" onclick="showPage('home')">Home</a></li>
     <li><a href="#gamespage" onclick="showPage('gamespage')">Games</a></li>
     <li><a href="#aboutpage" onclick="showPage('aboutpage')">About</a></li>
-    <li><a href="#cartpage" onclick="showPage('cartpage')">Cart</a></li>
-    <li><a href="#wishlistpage" onclick="showPage('wishlistpage')">Wishlist</a></li>
+    <li><a href="#cartpage" onclick="showPage('cartpage')"> Cart <span id="cart-count" class="badge">0</span></a></li>
+    <li><a href="#wishlistpage" onclick="showPage('wishlistpage')">Wishlist <span id="wishlist-count" class="badge">0</span></a></li>
   </ul>
   
  <div class="profile">
@@ -37,6 +36,7 @@
  <div id="hero-container"></div>
 </section>
 
+ 
 <section class="page" id="gamespage">
   <h1>All available games here</h1>
         <!-- Filter Section -->
@@ -69,7 +69,7 @@
                 <label for="price-filter">Max Price ($)</label>
                 <input type="number" id="price-filter" placeholder="e.g., 50" min="0" step="0.01">
             </div>
-<div class="filter-group">
+         <div class="filter-group">
                 <label for="sort-select">Sort By</label>
                 <select id="sort-select">
                     <option value="default">Default</option>
@@ -94,11 +94,13 @@
         </div>
         
         <!-- Games Container -->
-        <div id="games-container" class="games-container">
+        <div id="games-container" class="games-container" class="">
             <!-- Games populated by JavaScript -->
+         
         </div>
 </section>
 
+ 
  <section class="page" id="gamedetailpage">
   <button class="back-btn" onclick="showPage('gamespage')">← Back to Games</button>
 
@@ -143,6 +145,8 @@
   </div>
 </section>
 
+
+ 
 <section class="page" id="aboutpage">
   <h1>About our game store</h1>
            <!-- Store Description -->
@@ -207,7 +211,6 @@
     <button class="place-order-btn" onclick="showPage('checkoutpage')">Proceed to Checkout →</button>
   </div>
 </section>
-</section>
 
 <section class="page" id="wishlistpage">
   <h1>Your saved games</h1>
@@ -218,7 +221,7 @@
     <section class="page" id="checkoutpage">
         <h1>Checkout</h1>
         <div class="checkout-container">
-            <form id="paymentForm" class="payment-form", onsubmit="return validatePaymentForm(event)">
+            <form id="paymentForm" class="payment-form" onsubmit="return validatePaymentForm(event)">
                 <fieldset>
                     <legend>Personal Information</legend>
                     
