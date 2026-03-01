@@ -3,41 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+ 
 <title>Game Store Website</title>
  <link rel="stylesheet" href="style.css">
  
 </head>
-<body>
+
+ <body>
 
   <header>
    
-<a href="#" class="logo">Game Center</a>
+    <a href="#" class="logo">Game Center</a>
 
-  <ul class="navbar">
-    <li><a href="#home" onclick="showPage('home')">Home</a></li>
-    <li><a href="#gamespage" onclick="showPage('gamespage')">Games</a></li>
-    <li><a href="#aboutpage" onclick="showPage('aboutpage')">About</a></li>
-    <li><a href="#cartpage" onclick="showPage('cartpage')">Cart</a></li>
-    <li><a href="#wishlistpage" onclick="showPage('wishlistpage')">Wishlist</a></li>
-  </ul>
+     <ul class="navbar">
+       <li><a href="#home" onclick="showPage('home')">Home</a></li>
+       <li><a href="#gamespage" onclick="showPage('gamespage')">Games</a></li>
+       <li><a href="#aboutpage" onclick="showPage('aboutpage')">About</a></li>
+       <li><a href="#cartpage" onclick="showPage('cartpage')">Cart</a></li>
+       <li><a href="#wishlistpage" onclick="showPage('wishlistpage')">Wishlist</a></li>
+    </ul>
   
- <div class="profile">
-<img src="images/profile.jpg" alt="">
-<span>Abdus Rahman</span>
-</div>
+    <div class="profile">
+       <img src="images/profile.jpg" alt="">
+       <span>Abdus Rahman</span>
+    </div>
+ 
   </header>
   
+<!--////////////////////////////////////////////////////////////////////// Home Page--> 
 
-<section class="page" id="home">
-  <h1>Welcome to Game Center!</h1>
- <p>Only Recommend for You</p>
+ <section class="page" id="home">
+  
+   <h1>Welcome to Game Center!</h1>
+   <p>Only Recommend for You</p>
+   <div id="hero-container"></div>
+  
+ </section>
 
- <div id="hero-container"></div>
-</section>
+ <!-- ////////////////////////////////////////////////////////////////////// Game Page-->
 
 <section class="page" id="gamespage">
+ 
   <h1>All available games here</h1>
         <!-- Filter Section -->
         <div class="filters">
@@ -99,6 +105,8 @@
         </div>
 </section>
 
+   <!-- ////////////////////////////////////////////////////////////////////// About Us Page-->
+
 <section class="page" id="aboutpage">
   <h1>About our game store</h1>
            <!-- Store Description -->
@@ -150,18 +158,22 @@
         </div>
 </section>
 
+ <!-- ////////////////////////////////////////////////////////////////////// Cart Page-->
 
 <section class="page" id="cartpage">
   <h1>Your selected items</h1>
 </section>
 
+   <!-- ////////////////////////////////////////////////////////////////////// Wishlist Page-->
+
+
 <section class="page" id="wishlistpage">
   <h1>Your saved games</h1>
- <div id="wishlist-container" class="wishlist-container">
-            <!-- Wishlist items populated by JavaScript -->
-        </div>
+ <div id="wishlist-container" class="wishlist-container">   </div>
 </section>
-<!-- CHECKOUT PAGE -->
+  
+ <!-- ////////////////////////////////////////////////////////////////////// Checkout Page-->
+  
     <section class="page" id="checkoutpage">
         <h1>Checkout</h1>
         <div class="checkout-container">
