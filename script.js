@@ -136,7 +136,7 @@ function displayRecommendedGames() {
   const recommendedGames = games.filter(game => game.recommended);
 
   heroContainer.innerHTML = recommendedGames.map(game => `
-    <div class="hero-game">
+    <div class="hero-game" style="cursor:pointer" onclick="openGameDetail(${game.id})">
       <img src="${game.image}" alt="${game.title}">
       <h2>${game.title}</h2>
       <p>${game.description}</p>
@@ -145,6 +145,93 @@ function displayRecommendedGames() {
     </div>
   `).join("");
 } 
+
+function openGameDetail(gameId) {
+  // find game
+  var game = null;
+  for (var i = 0; i < games.length; i++) {
+    if (games[i].id === gameId) {
+      game = games[i];
+      break;
+    }
+  }
+  if (!game) return;
+
+  // text/specs
+  document.getElementById("detail-title").textContent = game.title;
+  document.getElementById("detail-description").textContent = game.description;
+  document.getElementById("detail-category").textContent = game.category;
+  document.getElementById("detail-platform").textContent = game.platform;
+  document.getElementById("detail-release").textContent = game.releaseDate;
+  document.getElementById("detail-rating").textContent = "★ " + game.rating;
+  document.getElementById("detail-price").textContent = Number(game.price).toFixed(2);
+
+  // main image
+  var mainImg = document.getElementById("detail-main-image");
+  mainImg.src = game.image;
+  mainImg.alt = game.title;
+
+  // thumbnails (4 distinct via filters)
+  var thumbs = document.getElementById("detail-thumbnails");
+  var thumbClasses = ["filt1", "filt2", "filt3", "filt4"];
+  var thumbsHtml = "";
+  for (var t = 0; t < 4; t++) {
+    thumbsHtml +=
+      '<div class="thumb ' + thumbClasses[t] + '" onclick="setDetailMainImage(\'' + game.image + '\', \'' + escapeQuotes(game.title) + '\')">' +
+      '<img src="' + game.image + '" alt="thumbnail ' + (t + 1) + '">' +
+      "</div>";
+  }
+  thumbs.innerHTML = thumbsHtml;
+
+  // screenshots (4 distinct via filters)
+  var shots = document.getElementById("detail-screenshots");
+  var shotsHtml = "";
+  for (var s = 0; s < 4; s++) {
+    shotsHtml +=
+      '<div class="screen ' + thumbClasses[s] + '">' +
+      '<img src="' + game.image + '" alt="screenshot ' + (s + 1) + '">' +
+      "</div>";
+  }
+  shots.innerHTML = shotsHtml;
+
+  // reviews (fake)
+  var reviews = document.getElementById("detail-reviews");
+  var sample = [
+    { name: "Alex", text: "Really fun gameplay loop and great pacing. Worth it!" },
+    { name: "Sam", text: "Graphics look awesome and the controls feel smooth." },
+    { name: "Jordan", text: "Solid game for the price. Would recommend to friends." }
+  ];
+  var reviewsHtml = "";
+  for (var r = 0; r < sample.length; r++) {
+    reviewsHtml +=
+      '<div class="review">' +
+      "<strong>" + sample[r].name + "</strong>" +
+      "<p>" + sample[r].text + "</p>" +
+      "</div>";
+  }
+  reviews.innerHTML = reviewsHtml;
+
+  // wire buttons
+  var cartBtn = document.getElementById("detail-add-cart-btn");
+  var wishBtn = document.getElementById("detail-add-wish-btn");
+
+  cartBtn.onclick = function() { addToCart(game.id); };
+  wishBtn.onclick = function() { addToWishlist(game.id); };
+
+  // navigate to detail page
+  showPage("gamedetailpage");
+}
+
+function setDetailMainImage(src, title) {
+  var mainImg = document.getElementById("detail-main-image");
+  mainImg.src = src;
+  mainImg.alt = title;
+}
+
+// helper to safely embed titles with quotes in onclick strings
+function escapeQuotes(str) {
+  return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
 
 
 document.getElementById("newsletterForm").addEventListener("submit", function(e) {
@@ -668,15 +755,15 @@ function displayGamesInContainer(gamesToShow) {
         for (var i = 0; i < gamesToShow.length; i++) {
             var game = gamesToShow[i];
             html = html + '<div class="game-card">';
-            html = html + '<img src="' + game.image + '" alt="' + game.title + '">';
-            html = html + '<div class="game-info">';
-            html = html + '<h3>' + game.title + '</h3>';
+            html = html + '<img src="' + game.image + '" alt="' + game.title + '" style="cursor:pointer" onclick="openGameDetail(' + game.id + ')">';            html = html + '<div class="game-info">';
+            html = html + '<h3 style="cursor:pointer" onclick="openGameDetail(' + game.id + ')">' + game.title + '</h3>';
             html = html + '<p class="rating">Rating: ' + game.rating + ' ★</p>';
             html = html + '<p class="category">' + game.category + ' | ' + game.platform + '</p>';
             html = html + '<p class="price">$' + game.price + '</p>';
             html = html + '<div class="actions">';
             html = html + '<button class="btn-cart" onclick="addToCart(' + Number(game.id) + ')">Add to Cart</button>';
             html = html + '<button class="btn-wish" onclick="addToWishlist(' + Number(game.id) + ')">Add to Wishlist</button>';
+            html = html + '<button class="view-btn" onclick="openGameDetail(' + game.id + ')">View Details</button>';
             html = html + '</div>';
             html = html + '</div>';
             html = html + '</div>';
