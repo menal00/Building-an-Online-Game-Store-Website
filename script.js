@@ -6,12 +6,21 @@ function showPage(pageId) {
   });
 
   document.getElementById(pageId).classList.add('active');
+  if (pageId === 'gamespage') {
+    displayGamesInContainer(games);
+  }
+  if (pageId === 'wishlistpage') {
+    displayWishlist();
+  }
 }
 
 // Show home page when site loads
 document.addEventListener("DOMContentLoaded", function() {
   showPage('home');
   displayRecommendedGames();
+  initCarousel();
+  updateWishlistBadge();
+   displayGamesInContainer(games);
 });
 
 
