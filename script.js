@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 const games = [
   {
+    id: 1,
     title: "Mythic Heroes",
     price: 29.99,
     rating: 4.5,
@@ -37,6 +38,7 @@ const games = [
     recommended: true
   },
   {
+    id: 2,
     title: "Time Princess",
     price: 19.99,
     rating: 4.2,
@@ -48,6 +50,7 @@ const games = [
     recommended: true
   },
   {
+    id: 3,
     title: "Subway Surfers",
     price: 9.99,
     rating: 4.8,
@@ -59,6 +62,7 @@ const games = [
     recommended: true
   },
   {
+    id: 4,
     title: "Cyber Strike",
     price: 49.99,
     rating: 4.6,
@@ -70,6 +74,7 @@ const games = [
     recommended: true
   },
   {
+    id: 5,
     title: "Fantasy World",
     price: 39.99,
     rating: 4.3,
@@ -81,6 +86,7 @@ const games = [
     recommended: false
   },
   {
+    id: 6,
     title: "Racing Fever",
     price: 24.99,
     rating: 4.1,
@@ -92,6 +98,7 @@ const games = [
     recommended: false
   },
   {
+    id: 7,
     title: "Battle Arena",
     price: 34.99,
     rating: 4.4,
@@ -103,6 +110,7 @@ const games = [
     recommended: false
   },
   {
+    id: 8,
     title: "Puzzle Master",
     price: 14.99,
     rating: 4.0,
@@ -181,44 +189,7 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
   emailInput.value = "";
 });
 
-document.getElementById("newsletterForm").addEventListener("submit", function(e) {
-  e.preventDefault();
 
-  const emailInput = document.getElementById("email");
-  const message = document.getElementById("formMessage");
-
-  const email = emailInput.value.trim();
-
-  // Clear previous classes
-  message.classList.remove("success", "error");
-
-  // Empty check
-  if (email === "") {
-    message.textContent = "Email cannot be empty.";
-    message.classList.add("error");
-    return;
-  }
-
-  // Proper email format check (professional way)
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!emailPattern.test(email)) {
-    message.textContent = "Please enter a valid email address.";
-    message.classList.add("error");
-    return;
-  }
-
-  // Success
-  message.textContent = "Successfully subscribed!";
-  message.classList.add("success");
-
-  emailInput.value = "";
-
-  // Remove message after 3 seconds
-  setTimeout(() => {
-    message.textContent = "";
-  }, 3000);
-});
 
 // WISHLIST PAGE FUNCTIONS 
 var wishlistItems = [];
@@ -625,7 +596,7 @@ function validateContactForm(event) {
         messageInput.value = '';
     }
     
-    return false;
+    return false;}
 
   // CHECKOUT PAGE FUNCTIONS
 function validatePaymentForm(event) {
