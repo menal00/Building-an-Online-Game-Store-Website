@@ -172,7 +172,7 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
   e.preventDefault();
 
   const emailInput = document.getElementById("email");
-  const errorMessage = document.getElementById("error-message");
+  const errorMessage = document.getElementById("formMessage");
 
   if (emailInput.value.trim() === "") {
     errorMessage.textContent = "Email cannot be empty.";
