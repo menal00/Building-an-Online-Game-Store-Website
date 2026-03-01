@@ -211,25 +211,93 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
   }, 3000);
 });
 
-function removeFromWishlist(gameId) {
-    let newWishlist = [];
-    for (let i = 0; i < wishlistItems.length; i++) {
-        if (wishlistItems[i].id !== gameId) {
-            newWishlist.push(wishlistItems[i]);
+// WISHLIST PAGE FUNCTIONS - YOUR CODE
+var wishlistItems = [];
+
+function addToWishlist(gameId) {
+    var gameToAdd = null;
+    for (var i = 0; i < games.length; i++) {
+        if (games[i].id === gameId) {
+            gameToAdd = games[i];
+            break;
         }
     }
-    wishlistItems = newWishlist;
     
+    if (!gameToAdd) return;
+    var alreadyInWishlist = false;
+    for (var i = 0; i < wishlistItems.length; i++) {
+        if (wishlistItems[i].id === gameId) {
+            alreadyInWishlist = true;
+            break;
+        }
+    }
+    
+    if (!alreadyInWishlist) {
+        var newIndex = wishlistItems.length;
+        wishlistItems[newIndex] = {
+            id: gameToAdd.id,
+            title: gameToAdd.title,
+            price: gameToAdd.price,
+            image: gameToAdd.image
+        };
+        
+        updateWishlistBadge();
+        displayWishlist();
+        alert(gameToAdd.title + ' added to wishlist!');
+    } else {
+        alert('This game is already added to your wishlist.');
+    }
+}
+
+function displayWishlist() {
+    var container = document.getElementById('wishlist-container');
+    if (!container) return;
+    
+    if (wishlistItems.length === 0) {
+        container.innerHTML = '<div class="empty-message">Your wishlist is empty. Browse games to add items!</div>';
+        return;
+    }
+    
+    var html = '';
+    for (var i = 0; i < wishlistItems.length; i++) {
+        var item = wishlistItems[i];
+        html = html + '<div class="wishlist-item">';
+        html = html + '<img src="' + item.image + '" alt="' + item.title + '">';
+        html = html + '<div class="info">';
+        html = html + '<h3>' + item.title + '</h3>';
+        html = html + '<p class="price">$' + item.price + '</p>';
+        html = html + '</div>';
+        html = html + '<div class="actions">';
+        html = html + '<button class="move-to-cart" onclick="moveToCart(' + item.id + ')">Move to Cart</button>';
+        html = html + '<button class="remove" onclick="removeFromWishlist(' + item.id + ')">Remove</button>';
+        html = html + '</div>';
+        html = html + '</div>';
+    }
+    
+    container.innerHTML = html;
+}
+
+function removeFromWishlist(gameId) {
+    var newWishlist = [];
+    var newIndex = 0;
+    
+    for (var i = 0; i < wishlistItems.length; i++) {
+        if (wishlistItems[i].id !== gameId) {
+            newWishlist[newIndex] = wishlistItems[i];
+            newIndex++;
+        }
+    }
+    
+    wishlistItems = newWishlist;
     updateWishlistBadge();
     displayWishlist();
     alert('Item removed from wishlist!');
 }
 
 function moveToCart(gameId) {
-    let itemToMove = null;
-    let itemIndex = -1;
-    
-    for (let i = 0; i < wishlistItems.length; i++) {
+    var itemToMove = null;
+    var itemIndex = -1;
+    for (var i = 0; i < wishlistItems.length; i++) {
         if (wishlistItems[i].id === gameId) {
             itemToMove = wishlistItems[i];
             itemIndex = i;
@@ -238,10 +306,15 @@ function moveToCart(gameId) {
     }
     
     if (itemToMove) {
-        let newWishlist = [];
-        for (let i = 0; i < wishlistItems.length; i++) {
+        if (typeof addToCart === 'function') {
+            addToCart(gameId);
+        }
+        var newWishlist = [];
+        var newIndex = 0;
+        for (var i = 0; i < wishlistItems.length; i++) {
             if (i !== itemIndex) {
-                newWishlist.push(wishlistItems[i]);
+                newWishlist[newIndex] = wishlistItems[i];
+                newIndex++;
             }
         }
         wishlistItems = newWishlist;
@@ -251,10 +324,8 @@ function moveToCart(gameId) {
         alert(itemToMove.title + ' moved to cart!');
     }
 }
-
-
 function updateWishlistBadge() {
-    const badge = document.getElementById('wishlist-count');
+    var badge = document.getElementById('wishlist-count');
     if (badge) {
         badge.innerHTML = wishlistItems.length;
     }
