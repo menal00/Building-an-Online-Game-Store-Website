@@ -773,3 +773,36 @@ footer h3 {
   font-size: 1.5rem;
   color: #ff9f1c;  /* orange accent */
 }
+
+footer form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+footer input[type="email"] {
+  padding: 0.8rem 1rem;
+  width: 250px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+footer button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #ff9f1c;
+  color: #0a0f1c;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+footer button:hover {
+  background-color: transparent;
+  color: #ff9f1c;
+  border: 2px solid #ff9f1c;
+}
+.success { color: green; }
+.error { color: red; }
