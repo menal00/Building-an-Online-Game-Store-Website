@@ -302,44 +302,6 @@ function removeFromWishlist(gameId) {
     displayWishlist();
     alert('Item removed from wishlist!');
 }
-
-function moveToCart(gameId) {
-    var itemToMove = null;
-    var itemIndex = -1;
-    for (var i = 0; i < wishlistItems.length; i++) {
-        if (wishlistItems[i].id === gameId) {
-            itemToMove = wishlistItems[i];
-            itemIndex = i;
-            break;
-        }
-    }
-    
-    if (itemToMove) {
-        if (typeof addToCart === 'function') {
-            addToCart(gameId);
-        }
-        var newWishlist = [];
-        var newIndex = 0;
-        for (var i = 0; i < wishlistItems.length; i++) {
-            if (i !== itemIndex) {
-                newWishlist[newIndex] = wishlistItems[i];
-                newIndex++;
-            }
-        }
-        wishlistItems = newWishlist;
-        
-        updateWishlistBadge();
-        displayWishlist();
-        alert(itemToMove.title + ' moved to cart!');
-    }
-}
-function updateWishlistBadge() {
-    var badge = document.getElementById('wishlist-count');
-    if (badge) {
-        badge.innerHTML = wishlistItems.length;
-    }
-}
-
 function processPayment(event) {
     event.preventDefault();
     
@@ -385,47 +347,6 @@ function processPayment(event) {
     
     return false;
 }
-function removeFromWishlist(gameId) {
-    let newWishlist = [];
-    for (let i = 0; i < wishlistItems.length; i++) {
-        if (wishlistItems[i].id !== gameId) {
-            newWishlist.push(wishlistItems[i]);
-        }
-    }
-    wishlistItems = newWishlist;
-    
-    updateWishlistBadge();
-    displayWishlist();
-    alert('Item removed from wishlist!');
-}
-
-function moveToCart(gameId) {
-    let itemToMove = null;
-    let itemIndex = -1;
-    
-    for (let i = 0; i < wishlistItems.length; i++) {
-        if (wishlistItems[i].id === gameId) {
-            itemToMove = wishlistItems[i];
-            itemIndex = i;
-            break;
-        }
-    }
-    
-    if (itemToMove) {
-        let newWishlist = [];
-        for (let i = 0; i < wishlistItems.length; i++) {
-            if (i !== itemIndex) {
-                newWishlist.push(wishlistItems[i]);
-            }
-        }
-        wishlistItems = newWishlist;
-        
-        updateWishlistBadge();
-        displayWishlist();
-        alert(itemToMove.title + ' moved to cart!');
-    }
-}
-
 
 function updateWishlistBadge() {
     const badge = document.getElementById('wishlist-count');
@@ -434,65 +355,6 @@ function updateWishlistBadge() {
     }
 }
 
-function processPayment(event) {
-    event.preventDefault();
-    
-    const email = document.getElementById('checkout-email').value;
-    const cardName = document.getElementById('card-name').value;
-    const cardNumber = document.getElementById('card-number').value;
-    const expiry = document.getElementById('expiry').value;
-    const cvv = document.getElementById('cvv').value;
-    
-    if (!email || !cardName || !cardNumber || !expiry || !cvv) {
-        alert('Please fill in all fields');
-        return false;
-    }
-    
-    if (cardNumber.length !== 16) {
-        alert('Card number must be 16 digits');
-        return false;
-    }
-  
-    const spinner = document.getElementById('loading-spinner');
-    spinner.style.display = 'block';
-
-    setTimeout(function() {
-        spinner.style.display = 'none';
-        
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        
-        let randomNum = '';
-        for (let i = 0; i < 4; i++) {
-            randomNum = randomNum + Math.floor(Math.random() * 10);
-        }
-        
-        const orderNumber = 'ORD-' + year + month + day + '-' + randomNum;
-        
-        alert('Order placed! Order Number: ' + orderNumber);
-        
-        document.getElementById('paymentForm').reset();
-        showPage('games-page');
-    }, 2000);
-    
-    return false;
-}
-
-function removeFromWishlist(gameId) {
-    let newWishlist = [];
-    for (let i = 0; i < wishlistItems.length; i++) {
-        if (wishlistItems[i].id !== gameId) {
-            newWishlist.push(wishlistItems[i]);
-        }
-    }
-    wishlistItems = newWishlist;
-    
-    updateWishlistBadge();
-    displayWishlist();
-    alert('Item removed from wishlist!');
-}
 function moveToCart(gameId) {
     let itemToMove = null;
     let itemIndex = -1;
@@ -519,55 +381,6 @@ function moveToCart(gameId) {
     }
 }
 
-function updateWishlistBadge() {
-    const badge = document.getElementById('wishlist-count');
-    if (badge) {
-        badge.innerHTML = wishlistItems.length;
-    }
-}
-function processPayment(event) {
-    event.preventDefault();
-    
-    const email = document.getElementById('checkout-email').value;
-    const cardName = document.getElementById('card-name').value;
-    const cardNumber = document.getElementById('card-number').value;
-    const expiry = document.getElementById('expiry').value;
-    const cvv = document.getElementById('cvv').value;
-    
-    if (!email || !cardName || !cardNumber || !expiry || !cvv) {
-        alert('Please fill in all fields');
-        return false;
-    }
- if (cardNumber.length !== 16) {
-        alert('Card number must be 16 digits');
-        return false;
-    }
-const spinner = document.getElementById('loading-spinner');
-    spinner.style.display = 'block';
-
-    setTimeout(function() {
-        spinner.style.display = 'none';
-        
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        
-        let randomNum = '';
-        for (let i = 0; i < 4; i++) {
-            randomNum = randomNum + Math.floor(Math.random() * 10);
-        }
-        
-        const orderNumber = 'ORD-' + year + month + day + '-' + randomNum;
-        
-        alert('Order placed! Order Number: ' + orderNumber);
-        
-        document.getElementById('paymentForm').reset();
-        showPage('games-page');
-    }, 2000);
-    
-    return false;
-}
 // GAMES PAGE FUNCTIONS 
 
 function applyFiltersAndSort() {
@@ -858,7 +671,7 @@ function validateContactForm(event) {
     
     return false;
 
-  / CHECKOUT PAGE FUNCTIONS
+  // CHECKOUT PAGE FUNCTIONS
 function validatePaymentForm(event) {
     event.preventDefault();
     
