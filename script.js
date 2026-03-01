@@ -849,6 +849,169 @@ function validateContactForm(event) {
     
     return false;
 
+  / CHECKOUT PAGE FUNCTIONS
+function validatePaymentForm(event) {
+    event.preventDefault();
+    
+    var email = document.getElementById('checkout-email').value;
+    var cardName = document.getElementById('card-name').value;
+    var cardNumber = document.getElementById('card-number').value;
+    var expiry = document.getElementById('expiry').value;
+    var cvv = document.getElementById('cvv').value;
+    
+    var emailError = document.getElementById('checkout-email-error');
+    var cardNameError = document.getElementById('cardname-error');
+    var cardNumberError = document.getElementById('cardnumber-error');
+    var expiryError = document.getElementById('expiry-error');
+    var cvvError = document.getElementById('cvv-error');
+    
+    emailError.innerHTML = '';
+    cardNameError.innerHTML = '';
+    cardNumberError.innerHTML = '';
+    expiryError.innerHTML = '';
+    cvvError.innerHTML = '';
+    
+    var isValid = true;
+    if (email === '') {
+        emailError.innerHTML = 'Email is required.';
+        isValid = false;
+    } else {
+        var hasAtSymbol = false;
+        for (var i = 0; i < email.length; i++) {
+            if (email.charAt(i) === '@') {
+                hasAtSymbol = true;
+                break;
+            }
+        }
+        if (!hasAtSymbol) {
+            emailError.innerHTML = 'Email must contain @ symbol.';
+            isValid = false;
+        }
+    }
+        if (cardName === '') {
+        cardNameError.innerHTML = 'Name on card is required.';
+        isValid = false;
+    }
+    if (cardNumber === '') {
+        cardNumberError.innerHTML = 'Card number is required.';
+        isValid = false;
+    } else if (cardNumber.length !== 16) {
+        cardNumberError.innerHTML = 'Card number must be 16 digits.';
+        isValid = false;
+    } else {
+        for (var i = 0; i < cardNumber.length; i++) {
+            var char = cardNumber.charAt(i);
+            if (char < '0' || char > '9') {
+                cardNumberError.innerHTML = 'Card number must contain only numbers.';
+                isValid = false;
+                break;
+            }
+        }
+    }
+    
+    if (expiry === '') {
+        expiryError.innerHTML = 'Expiry date is required.';
+        isValid = false;
+    } else if (expiry.length !== 5) {
+        expiryError.innerHTML = 'Use MM/YY format (e.g., 12/25).';
+        isValid = false;
+    } else if (expiry.charAt(2) !== '/') {
+        expiryError.innerHTML = 'Use MM/YY format (e.g., 12/25).';
+        isValid = false;
+    } else {
+        var month = expiry.substring(0, 2);
+        var year = expiry.substring(3, 5);
+        var monthValid = true;
+        var yearValid = true;
+        
+        for (var i = 0; i < month.length; i++) {
+            if (month.charAt(i) < '0' || month.charAt(i) > '9') {
+                monthValid = false;
+                break;
+            }
+        }
+        
+        for (var i = 0; i < year.length; i++) {
+            if (year.charAt(i) < '0' || year.charAt(i) > '9') {
+                yearValid = false;
+                break;
+            }
+        }
+        
+        if (!monthValid) {
+            expiryError.innerHTML = 'Month must be numbers.';
+            isValid = false;
+        } else if (!yearValid) {
+            expiryError.innerHTML = 'Year must be numbers.';
+            isValid = false;
+        } else {
+            var monthNum = 0;
+            for (var i = 0; i < month.length; i++) {
+                monthNum = monthNum * 10 + (month.charCodeAt(i) - 48);
+            }
+            
+            if (monthNum < 1 || monthNum > 12) {
+                expiryError.innerHTML = 'Month must be between 01 and 12.';
+                isValid = false;
+            }
+        }
+    }
+    if (cvv === '') {
+        cvvError.innerHTML = 'CVV is required.';
+        isValid = false;
+    } else if (cvv.length !== 3 && cvv.length !== 4) {
+        cvvError.innerHTML = 'CVV must be 3 or 4 digits.';
+        isValid = false;
+    } else {
+        for (var i = 0; i < cvv.length; i++) {
+            if (cvv.charAt(i) < '0' || cvv.charAt(i) > '9') {
+                cvvError.innerHTML = 'CVV must contain only numbers.';
+                isValid = false;
+                break;
+            }
+        }
+    }
+    if (isValid) {
+        processPayment();
+    }
+    
+    return false;
+}
+
+function processPayment() {
+    // Show loading spinner
+    var spinner = document.getElementById('loading-spinner');
+    spinner.className = 'loading-spinner';
+    setTimeout(function() {
+        spinner.className = 'loading-spinner hidden';
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var monthStr = '' + month;
+        if (month < 10) {
+            monthStr = '0' + month;
+        }
+        
+        var dayStr = '' + day;
+        if (day < 10) {
+            dayStr = '0' + day;
+        }
+        var randomNum = '';
+        for (var i = 0; i < 4; i++) {
+            randomNum = randomNum + Math.floor(Math.random() * 10);
+        }
+        var orderNumber = 'ORD-' + year + monthStr + dayStr + '-' + randomNum;
+        var email = document.getElementById('checkout-email').value;
+        alert('Order placed successfully!\nOrder Number: ' + orderNumber);
+        document.getElementById('paymentForm').reset();
+        showPage('gamespage');
+        
+    }, 2000);
+}
+
+  
+
   
    
 
