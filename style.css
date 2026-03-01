@@ -988,3 +988,31 @@ footer button:hover {
   #receiptpage { display: block !important; }
   #receipt-area { box-shadow: none !important; }
 }
+.hero-slide {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: #1e2434;
+  padding: 2rem;
+  border-radius: 16px;
+  color: white;
+}
+
+.hero-slide img {
+  width: 300px;
+  border-radius: 12px;
+}
+
+.hero-info button {
+  margin-right: 10px;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #ff9f1c;
+  background: transparent;
+  color: #ff9f1c;
+  cursor: pointer;
+}
+.hero-info button:hover {
+  background: #ff9f1c;
+  color: #0a0f1c;
+}
