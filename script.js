@@ -1,26 +1,33 @@
 function showPage(pageId) {
   const pages = document.querySelectorAll('.page');
-
   pages.forEach(page => {
     page.classList.remove('active');
   });
 
   document.getElementById(pageId).classList.add('active');
-  if (pageId === 'gamespage') {
-    displayGamesInContainer(games);
-  }
-  if (pageId === 'wishlistpage') {
-    displayWishlist();
-  }
+ if (pageId === 'gamespage') {
+  displayGamesInContainer(games);
+}
+if (pageId === 'cartpage') {
+  displayCart();
+}
+if (pageId === 'wishlistpage') {
+  displayWishlist();
 }
 
-// Show home page when site loads
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+  // load stored cart
+  loadCart();
+  updateCartBadge();
+
+  // (we’ll add wishlist persistence next step)
+  updateWishlistBadge();
+
   showPage('home');
   displayRecommendedGames();
-  initCarousel();
-  updateWishlistBadge();
-   displayGamesInContainer(games);
+  displayGamesInContainer(games);
 });
 
 
@@ -135,39 +142,12 @@ function displayRecommendedGames() {
       <h2>${game.title}</h2>
       <p>${game.description}</p>
       <p><strong>Price:</strong> $${game.price}</p>
-      <p><strong>Rating:</strong> ⭐ ${game.rating}</p>
+      <p><strong>Rating:</strong>  ${game.rating}</p>
     </div>
   `).join("");
 } 
 
-let currentIndex = 0;
 
-function initCarousel() {
-  const recommended = games.filter(game => game.recommended);
-  const carousel = document.getElementById("carousel");
-
-  function renderSlide() {
-    const game = recommended[currentIndex];
-    carousel.innerHTML = `
-      <img src="${game.image}" alt="${game.title}">
-      <h2>${game.title}</h2>
-      <p>${game.description}</p>
-      <p>$${game.price}</p>
-    `;
-  }
-
-  document.getElementById("prevBtn").addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + recommended.length) % recommended.length;
-    renderSlide();
-  });
-
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % recommended.length;
-    renderSlide();
-  });
-
-  renderSlide();
-}
 document.getElementById("newsletterForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -294,6 +274,7 @@ function moveToCart(gameId) {
         }
     }
   if (itemToMove) {
+    addToCart(gameId);
         let newWishlist = [];
         for (let i = 0; i < wishlistItems.length; i++) {
             if (i !== itemIndex) {
@@ -306,6 +287,171 @@ function moveToCart(gameId) {
         displayWishlist();
         alert(itemToMove.title + ' moved to cart!');
     }
+}
+
+/* =========================
+   CART (Rubric-required)
+========================= */
+
+var cartItems = []; // [{id, qty}]
+
+function loadCart() {
+  try {
+    var saved = localStorage.getItem("gc_cart");
+    if (saved) cartItems = JSON.parse(saved);
+  } catch (e) {
+    cartItems = [];
+  }
+}
+
+function saveCart() {
+  localStorage.setItem("gc_cart", JSON.stringify(cartItems));
+}
+
+function updateCartBadge() {
+  var badge = document.getElementById("cart-count");
+  if (!badge) return;
+
+  var count = 0;
+  for (var i = 0; i < cartItems.length; i++) {
+    count += cartItems[i].qty;
+  }
+  badge.innerHTML = count;
+}
+
+function findGameById(gameId) {
+  for (var i = 0; i < games.length; i++) {
+    if (games[i].id === gameId) return games[i];
+  }
+  return null;
+}
+
+function addToCart(gameId) {
+  var game = findGameById(gameId);
+  if (!game) return;
+
+  var found = false;
+  for (var i = 0; i < cartItems.length; i++) {
+    if (cartItems[i].id === gameId) {
+      cartItems[i].qty += 1;
+      found = true;
+      break;
+    }
+  }
+  if (!found) {
+    cartItems.push({ id: gameId, qty: 1 });
+  }
+
+  saveCart();
+  updateCartBadge();
+  displayCart();
+  alert(game.title + " added to cart!");
+}
+
+function removeFromCart(gameId) {
+  var newCart = [];
+  for (var i = 0; i < cartItems.length; i++) {
+    if (cartItems[i].id !== gameId) newCart.push(cartItems[i]);
+  }
+  cartItems = newCart;
+
+  saveCart();
+  updateCartBadge();
+  displayCart();
+}
+
+function changeQty(gameId, delta) {
+  for (var i = 0; i < cartItems.length; i++) {
+    if (cartItems[i].id === gameId) {
+      cartItems[i].qty += delta;
+      if (cartItems[i].qty <= 0) {
+        removeFromCart(gameId);
+        return;
+      }
+      break;
+    }
+  }
+
+  saveCart();
+  updateCartBadge();
+  displayCart();
+}
+
+function money(n) {
+  return "$" + Number(n).toFixed(2);
+}
+
+function calcTotals() {
+  var subtotal = 0;
+
+  for (var i = 0; i < cartItems.length; i++) {
+    var game = findGameById(cartItems[i].id);
+    if (game) subtotal += game.price * cartItems[i].qty;
+  }
+
+  var tax = subtotal * 0.13;
+  var total = subtotal + tax;
+
+  return { subtotal: subtotal, tax: tax, total: total };
+}
+
+function displayCart() {
+  var container = document.getElementById("cart-container");
+  if (!container) return;
+
+  if (cartItems.length === 0) {
+    container.innerHTML = '<div class="empty-message">Your cart is empty.</div>';
+
+    var totals0 = calcTotals();
+    var subEl0 = document.getElementById("cart-subtotal");
+    var taxEl0 = document.getElementById("cart-tax");
+    var totEl0 = document.getElementById("cart-total");
+    if (subEl0) subEl0.innerHTML = money(totals0.subtotal);
+    if (taxEl0) taxEl0.innerHTML = money(totals0.tax);
+    if (totEl0) totEl0.innerHTML = money(totals0.total);
+
+    var checkoutTotal0 = document.getElementById("checkout-total-display");
+    if (checkoutTotal0) checkoutTotal0.innerHTML = money(totals0.total);
+    return;
+  }
+
+  var html = "";
+  for (var i = 0; i < cartItems.length; i++) {
+    var it = cartItems[i];
+    var game = findGameById(it.id);
+    if (!game) continue;
+
+    html += '<div class="cart-item">';
+    html += '  <img src="' + game.image + '" alt="' + game.title + '">';
+    html += '  <div>';
+    html += '    <h3 style="color:#fff; margin-bottom:0.3rem;">' + game.title + "</h3>";
+    html += '    <div style="color:#d0d4e0;">' + money(game.price) + " each</div>";
+    html += '    <div style="color:#ff9f1c; font-weight:700; margin-top:0.4rem;">Item Total: ' + money(game.price * it.qty) + "</div>";
+    html += "  </div>";
+    html += '  <div>';
+    html += '    <div class="qty-controls">';
+    html += '      <button onclick="changeQty(' + game.id + ', -1)">−</button>';
+    html += '      <span style="min-width:24px; text-align:center; display:inline-block; color:#fff;">' + it.qty + "</span>";
+    html += '      <button onclick="changeQty(' + game.id + ', 1)">+</button>';
+    html += "    </div>";
+    html += '    <button class="remove" style="margin-top:0.8rem;" onclick="removeFromCart(' + game.id + ')">Remove</button>';
+    html += "  </div>";
+    html += "</div>";
+  }
+
+  container.innerHTML = html;
+
+  var totals = calcTotals();
+  var subEl = document.getElementById("cart-subtotal");
+  var taxEl = document.getElementById("cart-tax");
+  var totEl = document.getElementById("cart-total");
+  if (subEl) subEl.innerHTML = money(totals.subtotal);
+  if (taxEl) taxEl.innerHTML = money(totals.tax);
+  if (totEl) totEl.innerHTML = money(totals.total);
+
+  // also keep checkout total updated
+  var checkoutTotal = document.getElementById("checkout-total-display");
+  if (checkoutTotal) checkoutTotal.innerHTML = money(totals.total);
 }
 
 // GAMES PAGE FUNCTIONS 
@@ -585,7 +731,7 @@ function validateContactForm(event) {
         }
     }
     if (message === '') {
-        messageError.innerHTML = 'Please enter Email.';
+        messageError.innerHTML = 'Message cannot be empty.';
         isValid = false;
     }
 
@@ -759,7 +905,8 @@ function processPayment() {
     }, 2000);
 }
 
-  
+ 
+
 
   
    
