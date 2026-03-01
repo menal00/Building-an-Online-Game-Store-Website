@@ -18,11 +18,10 @@ if (pageId === 'wishlistpage') {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  // load stored cart
   loadCart();
   updateCartBadge();
 
-  // (we’ll add wishlist persistence next step)
+  loadWishlist();
   updateWishlistBadge();
 
   showPage('home');
@@ -173,6 +172,18 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
 
 // WISHLIST PAGE FUNCTIONS 
 var wishlistItems = [];
+function loadWishlist() {
+  try {
+    var saved = localStorage.getItem("gc_wishlist");
+    if (saved) wishlistItems = JSON.parse(saved);
+  } catch (e) {
+    wishlistItems = [];
+  }
+}
+
+function saveWishlist() {
+  localStorage.setItem("gc_wishlist", JSON.stringify(wishlistItems));
+}
 
 function addToWishlist(gameId) {
     var gameToAdd = null;
@@ -200,7 +211,8 @@ function addToWishlist(gameId) {
             price: gameToAdd.price,
             image: gameToAdd.image
         };
-        
+      
+        saveWishlist();
         updateWishlistBadge();
         displayWishlist();
         alert(gameToAdd.title + ' added to wishlist!');
@@ -249,6 +261,7 @@ function removeFromWishlist(gameId) {
     }
     
     wishlistItems = newWishlist;
+    saveWishlist();
     updateWishlistBadge();
     displayWishlist();
     alert('Item removed from wishlist!');
@@ -282,7 +295,7 @@ function moveToCart(gameId) {
             }
         }
         wishlistItems = newWishlist;
-        
+        saveWishlist();
         updateWishlistBadge();
         displayWishlist();
         alert(itemToMove.title + ' moved to cart!');
