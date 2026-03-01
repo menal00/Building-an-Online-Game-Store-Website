@@ -133,55 +133,48 @@ const games = [
 var recommendedIndex = 0;
 var recommendedGames = [];
 
-function displayRecommendedGames() {
-  recommendedGames = games.filter(function(game) {
-    return game.recommended;
-  });
+var recommendedIndex = 0;
+var recommendedGames = [];
 
+function displayRecommendedGames() {
+  recommendedGames = games.filter(function(g) { return g.recommended; });
+  recommendedIndex = 0;
   renderHeroSlide();
 }
 
 function renderHeroSlide() {
   var heroContainer = document.getElementById("hero-container");
-  if (!heroContainer || recommendedGames.length === 0) return;
+  if (!heroContainer) return;
+
+  if (recommendedGames.length === 0) {
+    heroContainer.innerHTML = "<p>No recommended games.</p>";
+    return;
+  }
 
   var game = recommendedGames[recommendedIndex];
 
-  heroContainer.innerHTML = `
-    <div class="hero-slide">
-      <img src="${game.image}" alt="${game.title}">
-      <div class="hero-info">
-        <h2>${game.title}</h2>
-        <p>${game.description}</p>
-        <p><strong>Price:</strong> $${game.price}</p>
-        <p><strong>Rating:</strong> ${game.rating} ★</p>
-
-        <div style="margin-top:1rem;">
-          <button class="btn-details" onclick="openGameDetail(${game.id})">View Details</button>
-        </div>
-
-        <div style="margin-top:1rem;">
-          <button onclick="prevHero()">⬅ Prev</button>
-          <button onclick="nextHero()">Next ➡</button>
-        </div>
-      </div>
-    </div>
-  `;
+  heroContainer.innerHTML =
+    '<div class="hero-game" style="cursor:pointer" onclick="openGameDetail(' + game.id + ')">' +
+      '<img src="' + game.image + '" alt="' + game.title + '">' +
+      '<h2>' + game.title + '</h2>' +
+      '<p>' + game.description + '</p>' +
+      '<p><strong>Price:</strong> $' + game.price + '</p>' +
+      '<p><strong>Rating:</strong> ' + game.rating + ' ★</p>' +
+      '<button class="btn-details" onclick="openGameDetail(' + game.id + '); event.stopPropagation();">View Details</button>' +
+    '</div>';
 }
 
 function nextHero() {
+  if (recommendedGames.length === 0) return;
   recommendedIndex++;
-  if (recommendedIndex >= recommendedGames.length) {
-    recommendedIndex = 0;
-  }
+  if (recommendedIndex >= recommendedGames.length) recommendedIndex = 0;
   renderHeroSlide();
 }
 
 function prevHero() {
+  if (recommendedGames.length === 0) return;
   recommendedIndex--;
-  if (recommendedIndex < 0) {
-    recommendedIndex = recommendedGames.length - 1;
-  }
+  if (recommendedIndex < 0) recommendedIndex = recommendedGames.length - 1;
   renderHeroSlide();
 }
 
