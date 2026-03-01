@@ -130,21 +130,60 @@ const games = [
 ];
 
 
+var recommendedIndex = 0;
+var recommendedGames = [];
+
 function displayRecommendedGames() {
-  const heroContainer = document.getElementById("hero-container");
+  recommendedGames = games.filter(function(game) {
+    return game.recommended;
+  });
 
-  const recommendedGames = games.filter(game => game.recommended);
+  renderHeroSlide();
+}
 
-  heroContainer.innerHTML = recommendedGames.map(game => `
-    <div class="hero-game" style="cursor:pointer" onclick="openGameDetail(${game.id})">
+function renderHeroSlide() {
+  var heroContainer = document.getElementById("hero-container");
+  if (!heroContainer || recommendedGames.length === 0) return;
+
+  var game = recommendedGames[recommendedIndex];
+
+  heroContainer.innerHTML = `
+    <div class="hero-slide">
       <img src="${game.image}" alt="${game.title}">
-      <h2>${game.title}</h2>
-      <p>${game.description}</p>
-      <p><strong>Price:</strong> $${game.price}</p>
-      <p><strong>Rating:</strong>  ${game.rating}</p>
+      <div class="hero-info">
+        <h2>${game.title}</h2>
+        <p>${game.description}</p>
+        <p><strong>Price:</strong> $${game.price}</p>
+        <p><strong>Rating:</strong> ${game.rating} ★</p>
+
+        <div style="margin-top:1rem;">
+          <button class="btn-details" onclick="openGameDetail(${game.id})">View Details</button>
+        </div>
+
+        <div style="margin-top:1rem;">
+          <button onclick="prevHero()">⬅ Prev</button>
+          <button onclick="nextHero()">Next ➡</button>
+        </div>
+      </div>
     </div>
-  `).join("");
-} 
+  `;
+}
+
+function nextHero() {
+  recommendedIndex++;
+  if (recommendedIndex >= recommendedGames.length) {
+    recommendedIndex = 0;
+  }
+  renderHeroSlide();
+}
+
+function prevHero() {
+  recommendedIndex--;
+  if (recommendedIndex < 0) {
+    recommendedIndex = recommendedGames.length - 1;
+  }
+  renderHeroSlide();
+}
 
 function openGameDetail(gameId) {
   // find game
