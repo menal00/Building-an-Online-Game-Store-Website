@@ -1007,42 +1007,62 @@ function validatePaymentForm(event) {
 }
 
 function processPayment() {
+  // Show loading spinner
   var spinner = document.getElementById('loading-spinner');
-  spinner.className = 'loading-spinner';
+  if (spinner) spinner.className = 'loading-spinner';
 
   setTimeout(function() {
+    if (spinner) spinner.className = 'loading-spinner hidden';
 
-    spinner.className = 'loading-spinner hidden';
-
+    // Build order number: ORD-YYYYMMDD-####
     var date = new Date();
-
-    // ORDER NUMBER FORMAT: ORD-YYYYMMDD-####
     var yyyy = date.getFullYear();
     var mm = String(date.getMonth() + 1).padStart(2, '0');
     var dd = String(date.getDate()).padStart(2, '0');
-    var randomNum = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
-    var orderNumber = 'ORD-' + yyyy + mm + dd + '-' + randomNum;
+    var rand4 = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+    var orderNumber = 'ORD-' + yyyy + mm + dd + '-' + rand4;
 
-    // DATE FORMAT: DD/MM/YYYY
+    // Order date: DD/MM/YYYY
     var orderDate = dd + '/' + mm + '/' + yyyy;
 
     var email = document.getElementById('checkout-email').value;
 
-    // calculate totals
+    // totals from YOUR cart structure: [{id, qty}]
     var subtotal = calculateCartSubtotal();
     var tax = subtotal * 0.13;
     var total = subtotal + tax;
 
+    // Fill receipt page
     renderReceipt(orderNumber, orderDate, email, subtotal, tax, total);
 
+    // Clear cart after successful checkout
     clearCart();
+
+    // Go to receipt page
     showPage('receiptpage');
+
+    // Reset the form
+    var form = document.getElementById('paymentForm');
+    if (form) form.reset();
 
   }, 1500);
 }
 
- function renderReceipt(orderNumber, orderDate, email, subtotal, tax, total) {
+ function calculateCartSubtotal() {
+  var subtotal = 0;
 
+  for (var i = 0; i < cartItems.length; i++) {
+    var it = cartItems[i];
+    var game = findGameById(it.id); // you already have findGameById from cart code
+    if (game) {
+      subtotal += game.price * it.qty;
+    }
+  }
+
+  return subtotal;
+}
+
+function renderReceipt(orderNumber, orderDate, email, subtotal, tax, total) {
   document.getElementById('r-order-number').textContent = orderNumber;
   document.getElementById('r-order-date').textContent = orderDate;
   document.getElementById('r-email').textContent = email;
@@ -1051,13 +1071,17 @@ function processPayment() {
   itemsContainer.innerHTML = '';
 
   for (var i = 0; i < cartItems.length; i++) {
-    var item = cartItems[i];
+    var it = cartItems[i];
+    var game = findGameById(it.id);
+    if (!game) continue;
+
+    var lineTotal = game.price * it.qty;
 
     var row = document.createElement('div');
     row.className = 'summary-row';
     row.innerHTML =
-      '<span>' + item.title + ' × ' + item.quantity + '</span>' +
-      '<span>$' + (item.price * item.quantity).toFixed(2) + '</span>';
+      '<span>' + game.title + ' × ' + it.qty + '</span>' +
+      '<span>$' + lineTotal.toFixed(2) + '</span>';
 
     itemsContainer.appendChild(row);
   }
@@ -1067,22 +1091,13 @@ function processPayment() {
   document.getElementById('r-total').textContent = '$' + total.toFixed(2);
 }
 
-function calculateCartSubtotal() {
-  var subtotal = 0;
-  for (var i = 0; i < cartItems.length; i++) {
-    subtotal += cartItems[i].price * cartItems[i].quantity;
-  }
-  return subtotal;
-}
-
 function clearCart() {
   cartItems = [];
   saveCart();
   updateCartBadge();
   displayCart();
+
+  // keep checkout total updated too
+  var checkoutTotal = document.getElementById("checkout-total-display");
+  if (checkoutTotal) checkoutTotal.innerHTML = "$0.00";
 }
-
-
-  
-   
-
