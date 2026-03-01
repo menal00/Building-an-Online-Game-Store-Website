@@ -11,14 +11,6 @@
   scroll-behavior: smooth;
   
 }
-:root {
---green-color: #3cb815;
---light-green-color: #c0eb7b;
---orange-color: #ff7e00;
---light-orange-color: #f75f1d;
---text-color: #1a2428;
---bg-color: #fff;
-}
 
 section{
   padding: 4.5rem 0 1.5rem;
@@ -29,7 +21,7 @@ img{
 }
 
 body{
-  color: var(--text-color);
+  color: #1a2428;
   padding-top: 80px;
 }
 
@@ -42,7 +34,7 @@ z-index: 1000;
 display: flex;
 align-items: center; 
 justify-content: space-between; 
-background: var(--bg-color);
+background:  #fff;
 box-shadow: 0 8px 11px rgb(14 55 54 / 15%);
 padding: 20px 20px; 
 transition: 0.5s;
@@ -73,7 +65,7 @@ display: flex;
 align-items: center; 
   font-size: 1.1rem; 
   font-weight: 600; 
-  color: var(--text-color); 
+  color: #1a2428; 
   column-gap: 0.5rem;
 }
 
@@ -85,14 +77,14 @@ column-gap: 0.5rem;
 
 .navbar a {
 font-size: 1rem; font-weight: 500; 
-color: var(--text-color);
+color: #1a2428;
 padding: 0.5rem 1rem;
 }
 
 .navbar a:hover , .navbar .home-active{
-background: var(--orange-color);
+background:#f75f1d;
 border-radius: 5rem;
-color: var(--bg-color); 
+color:  #fff; 
 transition: background 0.5s;
 }
 
@@ -147,6 +139,7 @@ transition: background 0.5s;
   line-height: 1.6;
   margin-bottom: 20px;
 }
+
 .page {
   display: none;
   padding: 40px;
@@ -337,6 +330,11 @@ transition: background 0.5s;
 .game-card .actions {
     display: flex;
     gap: 0.8rem;
+    flex-wrap: wrap;   /* allow 3 buttons */
+}
+.game-card .actions button{
+    flex: 1 1 140px;   /* wrap nicely */
+}
 }
 
 .game-card button {
@@ -354,6 +352,15 @@ transition: background 0.5s;
     gap: 5px;
 }
 
+.btn-details{
+  background-color: transparent;
+  color: #ff9f1c;
+  border: 2px solid #ff9f1c;
+}
+.btn-details:hover{
+  background-color: #ff9f1c;
+  color: #0a0f1c;
+}
 .btn-wish {
     background-color: transparent;
     color: #ffffff;
@@ -751,7 +758,7 @@ transition: background 0.5s;
   font-weight: 500;
 }
 
-}
+
 footer {
   background-color: #0f172a;   
   color: white;
