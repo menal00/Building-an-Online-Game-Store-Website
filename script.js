@@ -95,7 +95,13 @@ const games = [
     description: "Futuristic combat and survival missions.",
     image: "images/game4.jpg",
     releaseDate: "2023-01-12",
-    recommended: true
+    recommended: true, 
+    creenshots: [
+    "images/game4_1.jpeg",
+    "images/game4_2.jpg",
+    "images/game4_3.jpeg",
+    "images/game4_4.jpeg"
+  ]
   },
   {
     id: 5,
