@@ -133,8 +133,6 @@ const games = [
 var recommendedIndex = 0;
 var recommendedGames = [];
 
-var recommendedIndex = 0;
-var recommendedGames = [];
 
 function displayRecommendedGames() {
   recommendedGames = games.filter(function(g) { return g.recommended; });
