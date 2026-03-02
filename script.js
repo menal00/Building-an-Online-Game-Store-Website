@@ -59,7 +59,13 @@ const games = [
     description: "Travel back to 17th century Netherlands.",
     image: "images/home2.png",
     releaseDate: "2021-07-10",
-    recommended: true
+    recommended: true,
+    screenshots: [
+    "images/game2_1.jpeg",
+    "images/game2_2.jpg",
+    "images/game2_3.jpeg",
+    "images/game2_4.jpg"
+  ]
   },
   {
     id: 3,
