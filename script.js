@@ -185,8 +185,8 @@ const games = [
 
 //----------------------------Home Page (Recommended Games) ----------------------------------------------------------------//
 
-var recommendedIndex = 0;
-var recommendedGames = [];
+let recommendedIndex = 0;
+let recommendedGames = [];
 
 
 function displayRecommendedGames() {
@@ -196,7 +196,7 @@ function displayRecommendedGames() {
 }
 
 function renderHeroSlide() {
-  var heroContainer = document.getElementById("hero-container");
+  let heroContainer = document.getElementById("hero-container");
   if (!heroContainer) return;
 
   if (recommendedGames.length === 0) {
@@ -204,7 +204,7 @@ function renderHeroSlide() {
     return;
   }
 
-  var game = recommendedGames[recommendedIndex];
+  let game = recommendedGames[recommendedIndex];
 
   heroContainer.innerHTML =
     '<div class="hero-game" style="cursor:pointer" onclick="openGameDetail(' + game.id + ')">' +
@@ -232,8 +232,8 @@ function prevHero() {
 }
 
 function openGameDetail(gameId) {
-  var game = null;
-  for (var i = 0; i < games.length; i++) {
+  let game = null;
+  for (let i = 0; i < games.length; i++) {
     if (games[i].id === gameId) {
       game = games[i];
       break;
@@ -249,14 +249,14 @@ function openGameDetail(gameId) {
   document.getElementById("detail-rating").textContent = "★ " + game.rating;
   document.getElementById("detail-price").textContent = Number(game.price).toFixed(2);
 
-  var mainImg = document.getElementById("detail-main-image");
+  let mainImg = document.getElementById("detail-main-image");
   mainImg.src = game.image;
   mainImg.alt = game.title;
 
-  var thumbs = document.getElementById("detail-thumbnails");
-  var thumbClasses = ["filt1", "filt2", "filt3", "filt4"];
-  var thumbsHtml = "";
-  for (var t = 0; t < 4; t++) {
+  let thumbs = document.getElementById("detail-thumbnails");
+  let thumbClasses = ["filt1", "filt2", "filt3", "filt4"];
+  let thumbsHtml = "";
+  for (let t = 0; t < 4; t++) {
     thumbsHtml +=
       '<div class="thumb ' + thumbClasses[t] + '" onclick="setDetailMainImage(\'' + game.image + '\', \'' + escapeQuotes(game.title) + '\')">' +
       '<img src="' + game.image + '" alt="thumbnail ' + (t + 1) + '">' +
@@ -264,11 +264,11 @@ function openGameDetail(gameId) {
   }
   thumbs.innerHTML = thumbsHtml;
 
-var shots = document.getElementById("detail-screenshots");
-var shotsHtml = "";
+let shots = document.getElementById("detail-screenshots");
+let shotsHtml = "";
 
 if (game.screenshots && game.screenshots.length > 0) {
-  for (var s = 0; s < game.screenshots.length; s++) {
+  for (let s = 0; s < game.screenshots.length; s++) {
     shotsHtml +=
       '<div class="screen">' +
       '<img src="' + game.screenshots[s] + '" alt="screenshot ' + (s + 1) + '">' +
@@ -280,14 +280,14 @@ if (game.screenshots && game.screenshots.length > 0) {
 
 shots.innerHTML = shotsHtml;
 
-  var reviews = document.getElementById("detail-reviews");
-  var sample = [
+  let reviews = document.getElementById("detail-reviews");
+  let sample = [
     { name: "Menal", text: "Really fun games and great pacing. Worth it!" },
     { name: "Kulsoom", text: "Fun Fun and look awesome!!" },
     { name: "Nura", text: "Solid game for the price. Would recommend to friends." }
   ];
-  var reviewsHtml = "";
-  for (var r = 0; r < sample.length; r++) {
+  let reviewsHtml = "";
+  for (let r = 0; r < sample.length; r++) {
     reviewsHtml +=
       '<div class="review">' +
       "<strong>" + sample[r].name + "</strong>" +
@@ -296,8 +296,8 @@ shots.innerHTML = shotsHtml;
   }
   reviews.innerHTML = reviewsHtml;
 
-  var cartBtn = document.getElementById("detail-add-cart-btn");
-  var wishBtn = document.getElementById("detail-add-wish-btn");
+  let cartBtn = document.getElementById("detail-add-cart-btn");
+  let wishBtn = document.getElementById("detail-add-wish-btn");
 
   cartBtn.onclick = function() { addToCart(game.id); };
   wishBtn.onclick = function() { addToWishlist(game.id); };
@@ -306,7 +306,7 @@ shots.innerHTML = shotsHtml;
 }
 
 function setDetailMainImage(src, title) {
-  var mainImg = document.getElementById("detail-main-image");
+  let mainImg = document.getElementById("detail-main-image");
   mainImg.src = src;
   mainImg.alt = title;
 }
@@ -340,10 +340,10 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
 //---------------------------- Wishlist Page ----------------------------------------------------------------//
 
 
-var wishlistItems = [];
+let wishlistItems = [];
 function loadWishlist() {
   try {
-    var saved = localStorage.getItem("gc_wishlist");
+    let saved = localStorage.getItem("gc_wishlist");
     if (saved) wishlistItems = JSON.parse(saved);
   } catch (e) {
     wishlistItems = [];
@@ -355,8 +355,8 @@ function saveWishlist() {
 }
 
 function addToWishlist(gameId) {
-    var gameToAdd = null;
-    for (var i = 0; i < games.length; i++) {
+    let gameToAdd = null;
+    for (let i = 0; i < games.length; i++) {
         if (games[i].id === gameId) {
             gameToAdd = games[i];
             break;
@@ -364,8 +364,8 @@ function addToWishlist(gameId) {
     }
     
     if (!gameToAdd) return;
-    var alreadyInWishlist = false;
-    for (var i = 0; i < wishlistItems.length; i++) {
+    let alreadyInWishlist = false;
+    for (let i = 0; i < wishlistItems.length; i++) {
         if (wishlistItems[i].id === gameId) {
             alreadyInWishlist = true;
             break;
@@ -373,7 +373,7 @@ function addToWishlist(gameId) {
     }
     
     if (!alreadyInWishlist) {
-        var newIndex = wishlistItems.length;
+        let newIndex = wishlistItems.length;
         wishlistItems[newIndex] = {
             id: gameToAdd.id,
             title: gameToAdd.title,
@@ -391,7 +391,7 @@ function addToWishlist(gameId) {
 }
 
 function displayWishlist() {
-    var container = document.getElementById('wishlist-container');
+    let container = document.getElementById('wishlist-container');
     if (!container) return;
     
     if (wishlistItems.length === 0) {
@@ -399,9 +399,9 @@ function displayWishlist() {
         return;
     }
     
-    var html = '';
-    for (var i = 0; i < wishlistItems.length; i++) {
-        var item = wishlistItems[i];
+    let html = '';
+    for (let i = 0; i < wishlistItems.length; i++) {
+        let item = wishlistItems[i];
         html = html + '<div class="wishlist-item">';
         html = html + '<img src="' + item.image + '" alt="' + item.title + '">';
         html = html + '<div class="info">';
@@ -419,10 +419,10 @@ function displayWishlist() {
 }
 
 function removeFromWishlist(gameId) {
-    var newWishlist = [];
-    var newIndex = 0;
+    let newWishlist = [];
+    let newIndex = 0;
     
-    for (var i = 0; i < wishlistItems.length; i++) {
+    for (let i = 0; i < wishlistItems.length; i++) {
         if (wishlistItems[i].id !== gameId) {
             newWishlist[newIndex] = wishlistItems[i];
             newIndex++;
@@ -474,11 +474,11 @@ function moveToCart(gameId) {
 //---------------------------- Cart Page----------------------------------------------------------------//
 
 
-var cartItems = [];
+let cartItems = [];
 
 function loadCart() {
   try {
-    var saved = localStorage.getItem("gc_cart");
+    let saved = localStorage.getItem("gc_cart");
     if (saved) cartItems = JSON.parse(saved);
   } catch (e) {
     cartItems = [];
@@ -490,11 +490,11 @@ function saveCart() {
 }
 
 function updateCartBadge() {
-  var badge = document.getElementById("cart-count");
+  let badge = document.getElementById("cart-count");
   if (!badge) return;
 
-  var count = 0;
-  for (var i = 0; i < cartItems.length; i++) {
+  let count = 0;
+  for (let i = 0; i < cartItems.length; i++) {
     count += cartItems[i].qty;
   }
   badge.innerHTML = count;
@@ -502,18 +502,18 @@ function updateCartBadge() {
 
 function findGameById(gameId) {
   gameId = Number(gameId);
-  for (var i = 0; i < games.length; i++) {
+  for (let i = 0; i < games.length; i++) {
     if (Number(games[i].id) === gameId) return games[i];
   }
   return null;
 }
 
 function addToCart(gameId) {
-  var game = findGameById(gameId);
+  let game = findGameById(gameId);
   if (!game) return;
 
-  var found = false;
-  for (var i = 0; i < cartItems.length; i++) {
+  let found = false;
+  for (let i = 0; i < cartItems.length; i++) {
     if (cartItems[i].id === gameId) {
       cartItems[i].qty += 1;
       found = true;
@@ -531,8 +531,8 @@ function addToCart(gameId) {
 }
 
 function removeFromCart(gameId) {
-  var newCart = [];
-  for (var i = 0; i < cartItems.length; i++) {
+  let newCart = [];
+  for (let i = 0; i < cartItems.length; i++) {
     if (cartItems[i].id !== gameId) newCart.push(cartItems[i]);
   }
   cartItems = newCart;
@@ -543,7 +543,7 @@ function removeFromCart(gameId) {
 }
 
 function changeQty(gameId, delta) {
-  for (var i = 0; i < cartItems.length; i++) {
+  for (let i = 0; i < cartItems.length; i++) {
     if (cartItems[i].id === gameId) {
       cartItems[i].qty += delta;
       if (cartItems[i].qty <= 0) {
@@ -564,43 +564,43 @@ function money(n) {
 }
 
 function calcTotals() {
-  var subtotal = 0;
+  let subtotal = 0;
 
-  for (var i = 0; i < cartItems.length; i++) {
-    var game = findGameById(cartItems[i].id);
+  for (let i = 0; i < cartItems.length; i++) {
+    let game = findGameById(cartItems[i].id);
     if (game) subtotal += game.price * cartItems[i].qty;
   }
 
-  var tax = subtotal * 0.13;
-  var total = subtotal + tax;
+  let tax = subtotal * 0.13;
+  let total = subtotal + tax;
 
   return { subtotal: subtotal, tax: tax, total: total };
 }
 
 function displayCart() {
-  var container = document.getElementById("cart-container");
+  let container = document.getElementById("cart-container");
   if (!container) return;
 
   if (cartItems.length === 0) {
     container.innerHTML = '<div class="empty-message">Your cart is empty.</div>';
 
-    var totals0 = calcTotals();
-    var subEl0 = document.getElementById("cart-subtotal");
-    var taxEl0 = document.getElementById("cart-tax");
-    var totEl0 = document.getElementById("cart-total");
+    let totals0 = calcTotals();
+    let subEl0 = document.getElementById("cart-subtotal");
+    let taxEl0 = document.getElementById("cart-tax");
+    let totEl0 = document.getElementById("cart-total");
     if (subEl0) subEl0.innerHTML = money(totals0.subtotal);
     if (taxEl0) taxEl0.innerHTML = money(totals0.tax);
     if (totEl0) totEl0.innerHTML = money(totals0.total);
 
-    var checkoutTotal0 = document.getElementById("checkout-total-display");
+    let checkoutTotal0 = document.getElementById("checkout-total-display");
     if (checkoutTotal0) checkoutTotal0.innerHTML = money(totals0.total);
     return;
   }
 
-  var html = "";
-  for (var i = 0; i < cartItems.length; i++) {
-    var it = cartItems[i];
-    var game = findGameById(it.id);
+  let html = "";
+  for (let i = 0; i < cartItems.length; i++) {
+    let it = cartItems[i];
+    let game = findGameById(it.id);
     if (!game) continue;
 
     html += '<div class="cart-item">';
@@ -623,15 +623,15 @@ function displayCart() {
 
   container.innerHTML = html;
 
-  var totals = calcTotals();
-  var subEl = document.getElementById("cart-subtotal");
-  var taxEl = document.getElementById("cart-tax");
-  var totEl = document.getElementById("cart-total");
+  let totals = calcTotals();
+  let subEl = document.getElementById("cart-subtotal");
+  let taxEl = document.getElementById("cart-tax");
+  let totEl = document.getElementById("cart-total");
   if (subEl) subEl.innerHTML = money(totals.subtotal);
   if (taxEl) taxEl.innerHTML = money(totals.tax);
   if (totEl) totEl.innerHTML = money(totals.total);
 
-  var checkoutTotal = document.getElementById("checkout-total-display");
+  let checkoutTotal = document.getElementById("checkout-total-display");
   if (checkoutTotal) checkoutTotal.innerHTML = money(totals.total);
 }
 
@@ -639,17 +639,17 @@ function displayCart() {
 
 
 function applyFiltersAndSort() {
-    var categoryFilter = document.getElementById('category-filter');
-    var platformFilter = document.getElementById('platform-filter');
-    var priceFilter = document.getElementById('price-filter');
-    var sortSelect = document.getElementById('sort-select');
-    var searchInput = document.getElementById('search-input');
+    let categoryFilter = document.getElementById('category-filter');
+    let platformFilter = document.getElementById('platform-filter');
+    let priceFilter = document.getElementById('price-filter');
+    let sortSelect = document.getElementById('sort-select');
+    let searchInput = document.getElementById('search-input');
     
-    var category = 'all';
-    var platform = 'all';
-    var maxPrice = '';
-    var sortBy = 'default';
-    var searchTerm = '';
+    let category = 'all';
+    let platform = 'all';
+    let maxPrice = '';
+    let sortBy = 'default';
+    let searchTerm = '';
     
     if (categoryFilter) {
         category = categoryFilter.value;
@@ -665,9 +665,9 @@ function applyFiltersAndSort() {
     }
     if (searchInput) {
         searchTerm = searchInput.value;
-        var lowerSearch = '';
-        for (var s = 0; s < searchTerm.length; s++) {
-            var char = searchTerm.charAt(s);
+        let lowerSearch = '';
+        for (let s = 0; s < searchTerm.length; s++) {
+            let char = searchTerm.charAt(s);
             if (char >= 'A' && char <= 'Z') {
                 lowerSearch = lowerSearch + String.fromCharCode(char.charCodeAt(0) + 32);
             } else {
@@ -676,13 +676,13 @@ function applyFiltersAndSort() {
         }
         searchTerm = lowerSearch;
     }
-    var filteredGames = [];
-    for (var i = 0; i < games.length; i++) {
+    let filteredGames = [];
+    for (let i = 0; i < games.length; i++) {
         filteredGames[filteredGames.length] = games[i];
     }
     if (category !== 'all') {
-        var tempGames = [];
-        for (var i = 0; i < filteredGames.length; i++) {
+        let tempGames = [];
+        for (let i = 0; i < filteredGames.length; i++) {
             if (filteredGames[i].category === category) {
                 tempGames[tempGames.length] = filteredGames[i];
             }
@@ -690,8 +690,8 @@ function applyFiltersAndSort() {
         filteredGames = tempGames;
     }
     if (platform !== 'all') {
-        var tempGames = [];
-        for (var i = 0; i < filteredGames.length; i++) {
+        let tempGames = [];
+        for (let i = 0; i < filteredGames.length; i++) {
             if (filteredGames[i].platform === platform) {
                 tempGames[tempGames.length] = filteredGames[i];
             }
@@ -699,10 +699,10 @@ function applyFiltersAndSort() {
         filteredGames = tempGames;
     }
     if (maxPrice !== '') {
-        var price = 0;
+        let price = 0;
 
-      for (var p = 0; p < maxPrice.length; p++) {
-            var digit = maxPrice.charAt(p);
+      for (let p = 0; p < maxPrice.length; p++) {
+            let digit = maxPrice.charAt(p);
             if (digit >= '0' && digit <= '9') {
                 price = price * 10 + (digit.charCodeAt(0) - 48);
             } else if (digit === '.') {
@@ -710,8 +710,8 @@ function applyFiltersAndSort() {
             }
         }
         
-        var tempGames = [];
-        for (var i = 0; i < filteredGames.length; i++) {
+        let tempGames = [];
+        for (let i = 0; i < filteredGames.length; i++) {
             if (filteredGames[i].price <= price) {
                 tempGames[tempGames.length] = filteredGames[i];
             }
@@ -719,34 +719,34 @@ function applyFiltersAndSort() {
         filteredGames = tempGames;
     }
     if (searchTerm !== '') {
-        var tempGames = [];
-        for (var i = 0; i < filteredGames.length; i++) {
-            var title = filteredGames[i].title;
-            var lowerTitle = '';
-            for (var t = 0; t < title.length; t++) {
-                var char = title.charAt(t);
+        let tempGames = [];
+        for (let i = 0; i < filteredGames.length; i++) {
+            let title = filteredGames[i].title;
+            let lowerTitle = '';
+            for (let t = 0; t < title.length; t++) {
+                let char = title.charAt(t);
                 if (char >= 'A' && char <= 'Z') {
                     lowerTitle = lowerTitle + String.fromCharCode(char.charCodeAt(0) + 32);
                 } else {
                     lowerTitle = lowerTitle + char;
                 }
             }
-            var desc = filteredGames[i].description;
-            var lowerDesc = '';
-            for (var d = 0; d < desc.length; d++) {
-                var char = desc.charAt(d);
+            let desc = filteredGames[i].description;
+            let lowerDesc = '';
+            for (let d = 0; d < desc.length; d++) {
+                let char = desc.charAt(d);
                 if (char >= 'A' && char <= 'Z') {
                     lowerDesc = lowerDesc + String.fromCharCode(char.charCodeAt(0) + 32);
                 } else {
                     lowerDesc = lowerDesc + char;
                 }
             }
-            var titleFound = false;
-            var descFound = false;
+            let titleFound = false;
+            let descFound = false;
             if (lowerTitle.length >= searchTerm.length) {
-                for (var t = 0; t <= lowerTitle.length - searchTerm.length; t++) {
-                    var match = true;
-                    for (var s = 0; s < searchTerm.length; s++) {
+                for (let t = 0; t <= lowerTitle.length - searchTerm.length; t++) {
+                    let match = true;
+                    for (let s = 0; s < searchTerm.length; s++) {
                         if (lowerTitle.charAt(t + s) !== searchTerm.charAt(s)) {
                             match = false;
                             break;
@@ -759,9 +759,9 @@ function applyFiltersAndSort() {
                 }
             }
             if (lowerDesc.length >= searchTerm.length) {
-                for (var d = 0; d <= lowerDesc.length - searchTerm.length; d++) {
-                    var match = true;
-                    for (var s = 0; s < searchTerm.length; s++) {
+                for (let d = 0; d <= lowerDesc.length - searchTerm.length; d++) {
+                    let match = true;
+                    for (let s = 0; s < searchTerm.length; s++) {
                         if (lowerDesc.charAt(d + s) !== searchTerm.charAt(s)) {
                             match = false;
                             break;
@@ -781,40 +781,40 @@ function applyFiltersAndSort() {
         filteredGames = tempGames;
     }
     if (sortBy === 'price-asc') {
-        for (var i = 0; i < filteredGames.length - 1; i++) {
-            for (var j = 0; j < filteredGames.length - i - 1; j++) {
+        for (let i = 0; i < filteredGames.length - 1; i++) {
+            for (let j = 0; j < filteredGames.length - i - 1; j++) {
                 if (filteredGames[j].price > filteredGames[j + 1].price) {
-                    var temp = filteredGames[j];
+                    let temp = filteredGames[j];
                     filteredGames[j] = filteredGames[j + 1];
                     filteredGames[j + 1] = temp;
                 }
             }
         }
     } else if (sortBy === 'price-desc') {
-        for (var i = 0; i < filteredGames.length - 1; i++) {
-            for (var j = 0; j < filteredGames.length - i - 1; j++) {
+        for (let i = 0; i < filteredGames.length - 1; i++) {
+            for (let j = 0; j < filteredGames.length - i - 1; j++) {
                 if (filteredGames[j].price < filteredGames[j + 1].price) {
-                    var temp = filteredGames[j];
+                    let temp = filteredGames[j];
                     filteredGames[j] = filteredGames[j + 1];
                     filteredGames[j + 1] = temp;
                 }
             }
         }
     } else if (sortBy === 'rating-desc') {
-        for (var i = 0; i < filteredGames.length - 1; i++) {
-            for (var j = 0; j < filteredGames.length - i - 1; j++) {
+        for (let i = 0; i < filteredGames.length - 1; i++) {
+            for (let j = 0; j < filteredGames.length - i - 1; j++) {
                 if (filteredGames[j].rating < filteredGames[j + 1].rating) {
-                    var temp = filteredGames[j];
+                    let temp = filteredGames[j];
                     filteredGames[j] = filteredGames[j + 1];
                     filteredGames[j + 1] = temp;
                 }
             }
         }
     } else if (sortBy === 'name-asc') {
-        for (var i = 0; i < filteredGames.length - 1; i++) {
-            for (var j = 0; j < filteredGames.length - i - 1; j++) {
+        for (let i = 0; i < filteredGames.length - 1; i++) {
+            for (let j = 0; j < filteredGames.length - i - 1; j++) {
                 if (filteredGames[j].title > filteredGames[j + 1].title) {
-                    var temp = filteredGames[j];
+                    let temp = filteredGames[j];
                     filteredGames[j] = filteredGames[j + 1];
                     filteredGames[j + 1] = temp;
                 }
@@ -825,16 +825,16 @@ function applyFiltersAndSort() {
 }
 
 function displayGamesInContainer(gamesToShow) {
-    var container = document.getElementById('games-container');
+    let container = document.getElementById('games-container');
     if (!container) return;
     
-    var html = '';
+    let html = '';
     
     if (gamesToShow.length === 0) {
         html = '<p class="no-results">No games match your filters.</p>';
     } else {
-        for (var i = 0; i < gamesToShow.length; i++) {
-            var game = gamesToShow[i];
+        for (let i = 0; i < gamesToShow.length; i++) {
+            let game = gamesToShow[i];
             html = html + '<div class="game-card">';
             html = html + '<img src="' + game.image + '" alt="' + game.title + '" style="cursor:pointer" onclick="openGameDetail(' + game.id + ')">';       
             html = html + '<div class="game-info">';
@@ -855,9 +855,9 @@ function displayGamesInContainer(gamesToShow) {
     container.innerHTML = html;
 }
 function setView(viewType) {
-    var container = document.getElementById('games-container');
-    var gridBtn = document.getElementById('grid-view-btn');
-    var listBtn = document.getElementById('list-view-btn');
+    let container = document.getElementById('games-container');
+    let gridBtn = document.getElementById('grid-view-btn');
+    let listBtn = document.getElementById('list-view-btn');
     
     if (viewType === 'grid') {
         container.className = 'games-container';
@@ -876,23 +876,23 @@ function validateContactForm(event) {
     if (event) {
         event.preventDefault();
     }
-    var nameInput = document.getElementById('contact-name');
-    var emailInput = document.getElementById('contact-email');
-    var messageInput = document.getElementById('contact-message');
+    let nameInput = document.getElementById('contact-name');
+    let emailInput = document.getElementById('contact-email');
+    let messageInput = document.getElementById('contact-message');
     
-    var name = nameInput.value;
-    var email = emailInput.value;
-    var message = messageInput.value;
+    let name = nameInput.value;
+    let email = emailInput.value;
+    let message = messageInput.value;
     
-    var nameError = document.getElementById('name-error');
-    var emailError = document.getElementById('email-error');
-    var messageError = document.getElementById('message-error');
+    let nameError = document.getElementById('name-error');
+    let emailError = document.getElementById('email-error');
+    let messageError = document.getElementById('message-error');
     
     nameError.innerHTML = '';
     emailError.innerHTML = '';
     messageError.innerHTML = '';
     
-    var isValid = true;
+    let isValid = true;
     
     if (name === '') {
         nameError.innerHTML = 'Name cannot be empty.';
@@ -903,8 +903,8 @@ function validateContactForm(event) {
         emailError.innerHTML = 'Email cannot be empty.';
         isValid = false;
     } else {
-        var hasAtSymbol = false;
-        for (var i = 0; i < email.length; i++) {
+        let hasAtSymbol = false;
+        for (let i = 0; i < email.length; i++) {
             if (email.charAt(i) === '@') {
                 hasAtSymbol = true;
                 break;
@@ -934,17 +934,17 @@ function validateContactForm(event) {
 function validatePaymentForm(event) {
     event.preventDefault();
     
-    var email = document.getElementById('checkout-email').value;
-    var cardName = document.getElementById('card-name').value;
-    var cardNumber = document.getElementById('card-number').value;
-    var expiry = document.getElementById('expiry').value;
-    var cvv = document.getElementById('cvv').value;
+    let email = document.getElementById('checkout-email').value;
+    let cardName = document.getElementById('card-name').value;
+    let cardNumber = document.getElementById('card-number').value;
+    let expiry = document.getElementById('expiry').value;
+    let cvv = document.getElementById('cvv').value;
     
-    var emailError = document.getElementById('checkout-email-error');
-    var cardNameError = document.getElementById('cardname-error');
-    var cardNumberError = document.getElementById('cardnumber-error');
-    var expiryError = document.getElementById('expiry-error');
-    var cvvError = document.getElementById('cvv-error');
+    let emailError = document.getElementById('checkout-email-error');
+    let cardNameError = document.getElementById('cardname-error');
+    let cardNumberError = document.getElementById('cardnumber-error');
+    let expiryError = document.getElementById('expiry-error');
+    let cvvError = document.getElementById('cvv-error');
     
     emailError.innerHTML = '';
     cardNameError.innerHTML = '';
@@ -952,13 +952,13 @@ function validatePaymentForm(event) {
     expiryError.innerHTML = '';
     cvvError.innerHTML = '';
     
-    var isValid = true;
+    let isValid = true;
     if (email === '') {
         emailError.innerHTML = 'Email is required.';
         isValid = false;
     } else {
-        var hasAtSymbol = false;
-        for (var i = 0; i < email.length; i++) {
+        let hasAtSymbol = false;
+        for (let i = 0; i < email.length; i++) {
             if (email.charAt(i) === '@') {
                 hasAtSymbol = true;
                 break;
@@ -980,8 +980,8 @@ function validatePaymentForm(event) {
         cardNumberError.innerHTML = 'Card number must be 16 digits.';
         isValid = false;
     } else {
-        for (var i = 0; i < cardNumber.length; i++) {
-            var char = cardNumber.charAt(i);
+        for (let i = 0; i < cardNumber.length; i++) {
+            let char = cardNumber.charAt(i);
             if (char < '0' || char > '9') {
                 cardNumberError.innerHTML = 'Card number must contain only numbers.';
                 isValid = false;
@@ -1000,19 +1000,19 @@ function validatePaymentForm(event) {
         expiryError.innerHTML = 'Use MM/YY format (e.g., 12/25).';
         isValid = false;
     } else {
-        var month = expiry.substring(0, 2);
-        var year = expiry.substring(3, 5);
-        var monthValid = true;
-        var yearValid = true;
+        let month = expiry.substring(0, 2);
+        let year = expiry.substring(3, 5);
+        let monthValid = true;
+        let yearValid = true;
         
-        for (var i = 0; i < month.length; i++) {
+        for (let i = 0; i < month.length; i++) {
             if (month.charAt(i) < '0' || month.charAt(i) > '9') {
                 monthValid = false;
                 break;
             }
         }
         
-        for (var i = 0; i < year.length; i++) {
+        for (let i = 0; i < year.length; i++) {
             if (year.charAt(i) < '0' || year.charAt(i) > '9') {
                 yearValid = false;
                 break;
@@ -1026,8 +1026,8 @@ function validatePaymentForm(event) {
             expiryError.innerHTML = 'Year must be numbers.';
             isValid = false;
         } else {
-            var monthNum = 0;
-            for (var i = 0; i < month.length; i++) {
+            let monthNum = 0;
+            for (let i = 0; i < month.length; i++) {
                 monthNum = monthNum * 10 + (month.charCodeAt(i) - 48);
             }
             
@@ -1044,7 +1044,7 @@ function validatePaymentForm(event) {
         cvvError.innerHTML = 'CVV must be 3 or 4 digits.';
         isValid = false;
     } else {
-        for (var i = 0; i < cvv.length; i++) {
+        for (let i = 0; i < cvv.length; i++) {
             if (cvv.charAt(i) < '0' || cvv.charAt(i) > '9') {
                 cvvError.innerHTML = 'CVV must contain only numbers.';
                 isValid = false;
@@ -1064,26 +1064,26 @@ function validatePaymentForm(event) {
 
 function processPayment() {
 
-  var spinner = document.getElementById('loading-spinner');
+  let spinner = document.getElementById('loading-spinner');
   if (spinner) spinner.className = 'loading-spinner';
 
   setTimeout(function() {
     if (spinner) spinner.className = 'loading-spinner hidden';
 
-    var date = new Date();
-    var yyyy = date.getFullYear();
-    var mm = String(date.getMonth() + 1).padStart(2, '0');
-    var dd = String(date.getDate()).padStart(2, '0');
-    var rand4 = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
-    var orderNumber = 'ORD-' + yyyy + mm + dd + '-' + rand4;
+    let date = new Date();
+    let yyyy = date.getFullYear();
+    let mm = String(date.getMonth() + 1).padStart(2, '0');
+    let dd = String(date.getDate()).padStart(2, '0');
+    let rand4 = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+    let orderNumber = 'ORD-' + yyyy + mm + dd + '-' + rand4;
 
-    var orderDate = dd + '/' + mm + '/' + yyyy;
+    let orderDate = dd + '/' + mm + '/' + yyyy;
 
-    var email = document.getElementById('checkout-email').value;
+    let email = document.getElementById('checkout-email').value;
 
-    var subtotal = calculateCartSubtotal();
-    var tax = subtotal * 0.13;
-    var total = subtotal + tax;
+    let subtotal = calculateCartSubtotal();
+    let tax = subtotal * 0.13;
+    let total = subtotal + tax;
 
     getReceipt(orderNumber, orderDate, email, subtotal, tax, total);
 
@@ -1091,18 +1091,18 @@ function processPayment() {
 
     showPage('receiptpage');
 
-    var form = document.getElementById('paymentForm');
+    let form = document.getElementById('paymentForm');
     if (form) form.reset();
 
   }, 1500);
 }
 
 function calculateCartSubtotal() {
-  var subtotal = 0;
+  let subtotal = 0;
 
-  for (var i = 0; i < cartItems.length; i++) {
-    var it = cartItems[i];
-    var game = findGameById(it.id);
+  for (let i = 0; i < cartItems.length; i++) {
+    let it = cartItems[i];
+    let game = findGameById(it.id);
     if (game) subtotal += game.price * it.qty;
   }
 
@@ -1114,17 +1114,17 @@ function getReceipt(orderNumber, orderDate, email, subtotal, tax, total) {
   document.getElementById('r-order-date').textContent = orderDate;
   document.getElementById('r-email').textContent = email;
 
-  var itemsContainer = document.getElementById('r-items');
+  let itemsContainer = document.getElementById('r-items');
   itemsContainer.innerHTML = '';
 
-  for (var i = 0; i < cartItems.length; i++) {
-    var it = cartItems[i];
-    var game = findGameById(it.id);
+  for (let i = 0; i < cartItems.length; i++) {
+    let it = cartItems[i];
+    let game = findGameById(it.id);
     if (!game) continue;
 
-    var lineTotal = game.price * it.qty;
+    let lineTotal = game.price * it.qty;
 
-    var row = document.createElement('div');
+    let row = document.createElement('div');
     row.className = 'summary-row';
     row.innerHTML =
       '<span>' + game.title + ' × ' + it.qty + '</span>' +
@@ -1144,6 +1144,6 @@ function clearCart() {
   updateCartBadge();
   displayCart();
 
-  var checkoutTotal = document.getElementById("checkout-total-display");
+  let checkoutTotal = document.getElementById("checkout-total-display");
   if (checkoutTotal) checkoutTotal.innerHTML = "$0.00";
 }
