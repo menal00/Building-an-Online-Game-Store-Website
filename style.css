@@ -381,6 +381,7 @@ transition: background 0.5s;
     content: ' ♥';
 }
 
+
 /* ------------------------ Cart Page ------------------------------------------- */
 
 
@@ -424,6 +425,9 @@ transition: background 0.5s;
 
 /* ------------------------ About Page ------------------------------------------- */
 
+ .game_team{
+   color: #ff9f1c;
+ }
 
 .about-content {
     background-color: #1e2434;
@@ -431,6 +435,8 @@ transition: background 0.5s;
     border-radius: 16px;
     border: 1px solid #2a2f3f;
     margin-bottom: 2.5rem;
+    color: #ff9f1c;
+  
 }
 
 .about-content p {
