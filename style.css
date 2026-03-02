@@ -367,7 +367,7 @@ transition: background 0.5s;
   color: #0a0f1c;
 }
 .btn-wish {
-    background-color: transparent;
+    background-color: #1e2434;
     color: #ffffff;
     border: 2px solid #2a2f3f;
 }
@@ -385,7 +385,7 @@ transition: background 0.5s;
 
 
 .btn-cart {
-    background-color: #1e2434
+    background-color: #ff9f1c;
     color: #0a0f1c;
     border: 2px solid #ff9f1c;
 }
