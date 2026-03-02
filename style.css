@@ -150,7 +150,7 @@ transition: background 0.5s;
 }
 /* game page*/
 .filters {
-    background-color: #1e2434; /* Dark card background */
+    background-color: #1e2434; 
     padding: 1.5rem;
     border-radius: 12px;
     margin-bottom: 2rem;
@@ -170,7 +170,7 @@ transition: background 0.5s;
 
 .filter-group label {
     font-weight: 500;
-    color: #ff9f1c; /* Orange accent for labels */
+    color: #ff9f1c;
     font-size: 0.9em;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -326,14 +326,13 @@ transition: background 0.5s;
     margin: 1rem 0;
 }
 
-/* Buttons - Matching "Shop Now →" style */
 .game-card .actions {
     display: flex;
     gap: 0.8rem;
-    flex-wrap: wrap;   /* allow 3 buttons */
+    flex-wrap: wrap; 
 }
 .game-card .actions button{
-    flex: 1 1 140px;   /* wrap nicely */
+    flex: 1 1 140px;  
 }
 }
 
