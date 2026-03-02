@@ -96,7 +96,7 @@ const games = [
     image: "images/game4.jpg",
     releaseDate: "2023-01-12",
     recommended: true, 
-    creenshots: [
+    screenshots: [
     "images/game4_1.jpeg",
     "images/game4_2.jpg",
     "images/game4_3.jpeg",
@@ -149,7 +149,13 @@ const games = [
     description: "Multiplayer competitive battle arena.",
     image: "images/game7.jpg",
     releaseDate: "2021-06-30",
-    recommended: false
+    recommended: false, 
+     screenshots: [
+    "images/game7_1.jpeg",
+    "images/game7_2.jpeg",
+    "images/game7_3.jpeg",
+    "images/game7_4.jpeg"
+  ]
   },
   {
     id: 8,
@@ -161,7 +167,13 @@ const games = [
     description: "Challenge your brain with puzzles.",
     image: "images/game8.jpg",
     releaseDate: "2018-04-12",
-    recommended: false
+    recommended: false,
+    screenshots: [
+    "images/game8_1.jpg",
+    "images/game8_2.png",
+    "images/game8_3.jpeg",
+    "images/game8_4.jpeg"
+  ]
   }
 ];
 
