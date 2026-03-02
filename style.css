@@ -90,9 +90,9 @@ transition: background 0.5s;
 
 .container{
   width: 100%;
-  min-height: 100vh;   /* full screen height */
+  min-height: 100vh;   
   display: flex;
-  align-items: center;     /* vertical center */
+  align-items: center;    
   justify-content: space-between;
   padding: 0 120px;
   background: #f5f5f5;
@@ -105,40 +105,6 @@ transition: background 0.5s;
   transform: translateY(-50%);
   right: 200px;
 }
-.home-text{
-  max-width: 550px;
-}
-
-.home-text span{
-  font-size: 14px;
-  color: gray;
-}
-
-.home-text h1{
-  font-size: 48px;
-  margin: 10px 0;
-}
-
-.hero {
-  position: relative;
-  text-align: center;
-}
-
-.carousel img {
-  width: 400px;
-  height: auto;
-}
-
-.carousel-controls {
-  margin-top: 10px;
-}
-
-
-.home-text p{
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
 
 .page {
   display: none;
@@ -148,7 +114,45 @@ transition: background 0.5s;
 .page.active {
   display: block;
 }
+
+.hero-slide {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: #1e2434;
+  padding: 2rem;
+  border-radius: 16px;
+  color: white;
+}
+
+.hero-slide img {
+  width: 300px;
+  border-radius: 12px;
+}
+
+.hero-info button {
+  margin-right: 10px;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #ff9f1c;
+  background: transparent;
+  color: #ff9f1c;
+  cursor: pointer;
+}
+
+.hero-info button:hover {
+  background: #ff9f1c;
+  color: #0a0f1c;
+}
+
+.hero-controls{
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
 /* game page*/
+
 .filters {
     background-color: #1e2434; 
     padding: 1.5rem;
@@ -185,6 +189,7 @@ transition: background 0.5s;
     color: #ffffff;
     font-size: 0.95em;
 }
+
 .filter-group select:focus,
 .filter-group input:focus {
     border-color: #ff9f1c;
@@ -856,7 +861,7 @@ footer button:hover {
 }
 
 .back-btn{
-  background: transparent;
+  background: #1e2434;
   border: 2px solid #2a2f3f;
   color: #ffffff;
   padding: 0.6rem 1rem;
@@ -987,37 +992,4 @@ footer button:hover {
   #receiptpage { display: block !important; }
   #receipt-area { box-shadow: none !important; }
 }
-.hero-slide {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  background: #1e2434;
-  padding: 2rem;
-  border-radius: 16px;
-  color: white;
-}
 
-.hero-slide img {
-  width: 300px;
-  border-radius: 12px;
-}
-
-.hero-info button {
-  margin-right: 10px;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  border: 2px solid #ff9f1c;
-  background: transparent;
-  color: #ff9f1c;
-  cursor: pointer;
-}
-.hero-info button:hover {
-  background: #ff9f1c;
-  color: #0a0f1c;
-}
-
-.hero-controls{
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.8rem;
-}
