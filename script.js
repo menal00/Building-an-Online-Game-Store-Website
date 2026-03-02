@@ -2,9 +2,10 @@
 
 function showPage(pageId) {
   const pages = document.querySelectorAll('.page');
-  pages.forEach(page => {
-    page.classList.remove('active');
-  });
+  
+ for (let i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('active');
+  }
 
   document.getElementById(pageId).classList.add('active');
  if (pageId === 'gamespage') {
@@ -192,10 +193,10 @@ let recommendedGames = [];
 function displayRecommendedGames() {
   recommendedGames = games.filter(function(g) { return g.recommended; });
   recommendedIndex = 0;
-  renderHeroSlide();
+  getHeroSlide();
 }
 
-function renderHeroSlide() {
+function getHeroSlide() {
   let heroContainer = document.getElementById("hero-container");
   if (!heroContainer) return;
 
@@ -221,14 +222,14 @@ function nextHero() {
   if (recommendedGames.length === 0) return;
   recommendedIndex++;
   if (recommendedIndex >= recommendedGames.length) recommendedIndex = 0;
-  renderHeroSlide();
+  getHeroSlide();
 }
 
 function prevHero() {
   if (recommendedGames.length === 0) return;
   recommendedIndex--;
   if (recommendedIndex < 0) recommendedIndex = recommendedGames.length - 1;
-  renderHeroSlide();
+  getHeroSlide();
 }
 
 function openGameDetail(gameId) {
