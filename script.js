@@ -113,7 +113,13 @@ const games = [
     description: "Explore magical lands and creatures.",
     image: "images/game5.jpg",
     releaseDate: "2020-11-02",
-    recommended: false
+    recommended: false, 
+    screenshots: [
+    "images/game5_1.jpg",
+    "images/game5_2.jpeg",
+    "images/game5_3.jpg",
+    "images/game5_4.jpg"
+  ]
   },
   {
     id: 6,
@@ -125,7 +131,13 @@ const games = [
     description: "High-speed racing experience.",
     image: "images/game6.jpg",
     releaseDate: "2022-09-18",
-    recommended: false
+    recommended: false,
+    screenshots: [
+    "images/game6_1.jpeg",
+    "images/game6_2.jpeg",
+    "images/game6_3.jpeg",
+    "images/game6_4.jpeg"
+  ]
   },
   {
     id: 7,
