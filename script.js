@@ -77,7 +77,13 @@ const games = [
     description: "Endless runner full of excitement.",
     image: "images/home3.png",
     releaseDate: "2019-05-20",
-    recommended: true
+    recommended: true, 
+    screenshots: [
+    "images/game3_1.jpeg",
+    "images/game3_2.jpg",
+    "images/game3_3.jpg",
+    "images/game3_4.jpg"
+  ]
   },
   {
     id: 4,
