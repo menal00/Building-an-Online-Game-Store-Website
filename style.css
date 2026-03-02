@@ -1,4 +1,4 @@
-
+/* ------------------------ All ------------------------------------------- */
 
 *{
   font-family: 'poppins', sans-serif;
@@ -24,6 +24,9 @@ body{
   color: #1a2428;
   padding-top: 80px;
 }
+
+/* ------------------------ Navigation ------------------------------------------- */
+
 
 header{
 position: fixed;
@@ -115,6 +118,8 @@ transition: background 0.5s;
   display: block;
 }
 
+/* ------------------------ Home Page ------------------------------------------- */
+
 .hero-slide {
   display: flex;
   align-items: center;
@@ -151,7 +156,7 @@ transition: background 0.5s;
   gap: 0.8rem;
 }
 
-/* game page*/
+/* ------------------------ Game Page ------------------------------------------- */
 
 .filters {
     background-color: #1e2434; 
@@ -219,7 +224,6 @@ transition: background 0.5s;
     color: #ff9f1c;
 }
 
-/* View Toggle Buttons */
 .view-toggle {
     display: flex;
     justify-content: flex-end;
@@ -249,7 +253,6 @@ transition: background 0.5s;
     border-color: #ff9f1c;
 }
 
-/* Games Container - Grid View */
 .games-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -257,7 +260,6 @@ transition: background 0.5s;
     margin-top: 1rem;
 }
 
-/* List View */
 .games-container.list-view {
     grid-template-columns: 1fr;
 }
@@ -273,7 +275,6 @@ transition: background 0.5s;
     height: 150px;
 }
 
-/* Game Card */
 .game-card {
     background-color: #1e2434;
     border-radius: 16px;
@@ -380,6 +381,9 @@ transition: background 0.5s;
     content: ' ♥';
 }
 
+/* ------------------------ Cart Page ------------------------------------------- */
+
+
 .btn-cart {
     background-color: #ff9f1c;
     color: #0a0f1c;
@@ -395,7 +399,31 @@ transition: background 0.5s;
     content: ' →';
 }
 
-/* ABOUT PAGE */
+
+.cart-summary{
+  margin-top: 1.5rem;
+  background: #1e2434;
+  border: 1px solid #2a2f3f;
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 500px;
+}
+
+.summary-row{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  color: #d0d4e0;
+}
+
+.summary-row.total{
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ff9f1c;
+}
+
+/* ------------------------ About Page ------------------------------------------- */
+
 
 .about-content {
     background-color: #1e2434;
@@ -431,7 +459,6 @@ transition: background 0.5s;
     color: #ff9f1c;
 }
 
-/* Contact Form */
 .contact-form {
     background-color: #1e2434;
     padding: 2.5rem;
@@ -519,7 +546,7 @@ transition: background 0.5s;
     margin-left: 5px;
 }
 
-/* WISHLIST PAGE */
+/* ------------------------ Wishlist Page ------------------------------------------- */
 
 .wishlist-container {
     display: grid;
@@ -614,9 +641,52 @@ transition: background 0.5s;
     color: #8a8f9f;
     font-size: 1.2em;
     border: 1px solid #2a2f3f;
+
+  .cart-container{
+  display: grid;
+  gap: 1rem;
 }
 
-/* CHECKOUT PAGE  */
+.cart-item{
+  background: #1e2434;
+  border: 1px solid #2a2f3f;
+  border-radius: 16px;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.cart-item img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #ff9f1c;
+}
+
+.qty-controls{
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.qty-controls button{
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 2px solid #2a2f3f;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.qty-controls button:hover{ border-color: #ff9f1c; color: #ff9f1c; }
+
+}
+
+/* ------------------------ Check Out Page ------------------------------------------- */
 
 .checkout-container {
     max-width: 700px;
@@ -762,6 +832,9 @@ transition: background 0.5s;
   font-weight: 500;
 }
 
+/* ------------------------ Footer ------------------------------------------- */
+
+
 
 footer {
   background-color: #0f172a;   
@@ -809,6 +882,10 @@ footer button:hover {
 }
 .success { color: green; }
 .error { color: red; }
+
+
+/* ------------------------ Game Details  ------------------------------------------- */
+
 
 .detail-layout{
   display: grid;
@@ -905,69 +982,10 @@ footer button:hover {
 
 
 
-.cart-container{
-  display: grid;
-  gap: 1rem;
-}
 
-.cart-item{
-  background: #1e2434;
-  border: 1px solid #2a2f3f;
-  border-radius: 16px;
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: 100px 1fr auto;
-  gap: 1rem;
-  align-items: center;
-}
+/* ------------------------ Receipt  ------------------------------------------- */
 
-.cart-item img{
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 2px solid #ff9f1c;
-}
 
-.qty-controls{
-  display: flex;
-  gap: 0.6rem;
-  align-items: center;
-}
-
-.qty-controls button{
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  border: 2px solid #2a2f3f;
-  background: transparent;
-  color: #fff;
-  cursor: pointer;
-}
-
-.qty-controls button:hover{ border-color: #ff9f1c; color: #ff9f1c; }
-
-.cart-summary{
-  margin-top: 1.5rem;
-  background: #1e2434;
-  border: 1px solid #2a2f3f;
-  border-radius: 16px;
-  padding: 1.5rem;
-  max-width: 500px;
-}
-
-.summary-row{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.8rem;
-  color: #d0d4e0;
-}
-
-.summary-row.total{
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #ff9f1c;
-}
 .receipt{
   background: white;
   color: #111;
