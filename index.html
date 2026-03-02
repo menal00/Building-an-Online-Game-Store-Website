@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Store Website</title>
+
+ <title>Game Store Website</title>
  <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,20 +28,21 @@
 </div>
   </header>
   
-
+<!------------------------------------  Home Page ------------------------------------>
 <section class="page" id="home">
   <h1>Welcome to Game Center!</h1>
  <p>Only Recommend for You</p>
-
-<div id="hero-container"></div>
-
-<div class="hero-controls">
+ <div id="hero-container"></div>
+ 
+ <div class="hero-controls">
   <button class="view-btn" onclick="prevHero()">⬅ Prev</button>
   <button class="view-btn active-view" onclick="nextHero()">Next ➡</button>
 </div>
+ 
 </section>
 
-<!-- Game page --> 
+ <!------------------------------------  Game Page  ------------------------------------>
+
 <section class="page" id="gamespage">
   <h1>All available games here</h1>
         <!-- Filter Section -->
@@ -92,37 +93,31 @@
             
             <button class="apply-filters-btn" onclick="applyFiltersAndSort()">Apply Filters</button>
         </div>
-<!-- View Toggle -->
         <div class="view-toggle">
             <button id="grid-view-btn" class="view-btn active-view" onclick="setView('grid')">Grid View</button>
             <button id="list-view-btn" class="view-btn" onclick="setView('list')">List View</button>
         </div>
         
-        <!-- Games Container -->
-        <div id="games-container" class="games-container" class="">
-            <!-- Games populated by JavaScript -->
-         
+        <div id="games-container" class="games-container" class="">         
         </div>
 </section>
 
- 
+ <!------------------------------------  Game Detail Page ------------------------------------>
+
  <section class="page" id="gamedetailpage">
   <button class="back-btn" onclick="showPage('gamespage')">← Back to Games</button>
 
   <div class="detail-layout">
-    <!-- Left: main image + thumbnails -->
     <div class="detail-left">
       <img id="detail-main-image" class="detail-main-image" src="" alt="Game Image">
 
       <div class="thumb-row" id="detail-thumbnails">
-        <!-- JS will populate 4 thumbnails -->
       </div>
     </div>
 
-    <!-- Right: title, specs, actions -->
     <div class="detail-right">
       <h1 id="detail-title">Game Title</h1>
-      <p id="detail-description">Game description...</p>
+      <p id="detail-description">Game description</p>
 
       <div class="specs-card">
         <div><strong>Type:</strong> <span id="detail-category"></span></div>
@@ -141,38 +136,34 @@
 
   <h2 class="section-title">Screenshots</h2>
   <div class="screens-grid" id="detail-screenshots">
-    <!-- JS will populate 4 screenshots -->
   </div>
 
   <h2 class="section-title">Reviews</h2>
   <div class="reviews" id="detail-reviews">
-    <!-- JS will populate reviews -->
   </div>
 </section>
 
 
- <!-- about page -->
+<!------------------------------------  About Page ------------------------------------>
 <section class="page" id="aboutpage">
   <h1>About our game store</h1>
-           <!-- Store Description -->
+ 
         <div class="about-content">
-            <p>Welcome to<strong>GameStore – your premier destination for digital gaming!</strong></p>            
+            <p>Welcome to<strong>GameStore. Your premier destination for digital gaming!</strong></p>            
             <p> Since 2023, we've been connecting gamers with the best titles across PC, Console, and Mobile platforms. With thousands of satisfied customers and a catalog of 500+ digital games, we've built a trusted marketplace where finding your next favorite game is simple, secure, and exciting.</p>            
             <p>Our team works tirelessly to ensure you get the best prices, detailed game information, and a seamless purchasing experience. Whether you're a casual player or a hardcore gamer, GameStore has something special waiting for you.</p>
-            <p>We're gamers, just like you! Our team understands the thrill of discovering that perfect game. That's why we've created a platform that combines:</p>
+            <p>We're gamers, just like you! Our team understands the thrill of discovering that perfect game. That's why we've created a platform that combines.</p>
         </div>
  <ul>
                 <li><strong>Secure payments</strong></li>
                 <li><strong>Instant delivery</strong> </li>
-                <li><strong>Curated selection</strong> of indie gems & AAA hits</li>
-                <li><strong>24/7 support</strong> from fellow gamers</li>
+                <li><strong>Curated selection</strong></li>
+                <li><strong>24/7 support</strong></li>
             </ul>
                        
-            <p style="margin-top: 1.5rem;"><strong>Happy Gaming!</strong><br>
-            <span style="color: #ff9f1c;">🎮 The Game Center Team</span></p>
+            <span style="color: #ff9f1c;"> The Game Center Team</span></p>
       
         
-        <!-- Contact Form  -->
         <div class="contact-form">
             <form id="contactForm" onsubmit="return validateContactForm(event)">
                 <fieldset>
@@ -202,7 +193,7 @@
         </div>
 </section>
 
-<!-- Cart page  -->
+<!------------------------------------  Cart Page ------------------------------------>
 <section class="page" id="cartpage">
   <h1>Your selected items</h1>
   <div id="cart-container" class="cart-container"></div>
@@ -215,13 +206,16 @@
     <button class="place-order-btn" onclick="showPage('checkoutpage')">Proceed to Checkout →</button>
   </div>
 </section>
-<!-- wishlist page  -->
+ 
+ <!------------------------------------  Wishlit Page ------------------------------------>
+
 <section class="page" id="wishlistpage">
   <h1>Your saved games</h1>
  <div id="wishlist-container" class="wishlist-container">
         </div>
 </section>
-<!-- CHECKOUT PAGE -->
+ 
+<!------------------------------------  Checkout Page ------------------------------------>
     <section class="page" id="checkoutpage">
         <h1>Checkout</h1>
         <div class="checkout-container">
@@ -236,7 +230,6 @@
                     </div>
                 </fieldset>
                 
-                <!-- Card Information -->
                 <fieldset>
                     <legend>Card Information</legend>
                     
@@ -280,7 +273,8 @@
             <p>Processing your order...</p>
         </div>
     </section>
-<!-- Receipt page  -->
+ 
+<!------------------------------------  Receipt Page ------------------------------------>
 <section class="page" id="receiptpage">
   <h1>Receipt</h1>
 
@@ -309,7 +303,9 @@
     <button class="view-btn active-view" onclick="window.print()">Print / Save PDF</button>
   </div>
 </section>
- 
+
+ <!------------------------------------  Footer  ------------------------------------>
+
 <footer>
   <h3>Subscribe to our Newsletter</h3>
 
