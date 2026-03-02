@@ -1,3 +1,5 @@
+//---------------------------- Navigation ----------------------------------------------------------------//
+
 function showPage(pageId) {
   const pages = document.querySelectorAll('.page');
   pages.forEach(page => {
@@ -17,6 +19,9 @@ if (pageId === 'wishlistpage') {
 
 }
 
+
+//---------------------------- ----------------------------------------------------------------//
+
 document.addEventListener("DOMContentLoaded", function() {
   loadCart();
   updateCartBadge();
@@ -29,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
   displayGamesInContainer(games);
 });
 
+//---------------------------- Game Storage ----------------------------------------------------------------//
 
 const games = [
   {
@@ -177,6 +183,7 @@ const games = [
   }
 ];
 
+//----------------------------Home Page (Recommended Games) ----------------------------------------------------------------//
 
 var recommendedIndex = 0;
 var recommendedGames = [];
@@ -225,7 +232,6 @@ function prevHero() {
 }
 
 function openGameDetail(gameId) {
-  // find game
   var game = null;
   for (var i = 0; i < games.length; i++) {
     if (games[i].id === gameId) {
@@ -235,7 +241,6 @@ function openGameDetail(gameId) {
   }
   if (!game) return;
 
-  // text
   document.getElementById("detail-title").textContent = game.title;
   document.getElementById("detail-description").textContent = game.description;
   document.getElementById("detail-category").textContent = game.category;
@@ -244,12 +249,10 @@ function openGameDetail(gameId) {
   document.getElementById("detail-rating").textContent = "★ " + game.rating;
   document.getElementById("detail-price").textContent = Number(game.price).toFixed(2);
 
-  // main image
   var mainImg = document.getElementById("detail-main-image");
   mainImg.src = game.image;
   mainImg.alt = game.title;
 
-  // thumbnails (4 distinct via filters)
   var thumbs = document.getElementById("detail-thumbnails");
   var thumbClasses = ["filt1", "filt2", "filt3", "filt4"];
   var thumbsHtml = "";
@@ -261,7 +264,6 @@ function openGameDetail(gameId) {
   }
   thumbs.innerHTML = thumbsHtml;
 
-// screenshots (real images)
 var shots = document.getElementById("detail-screenshots");
 var shotsHtml = "";
 
@@ -278,12 +280,11 @@ if (game.screenshots && game.screenshots.length > 0) {
 
 shots.innerHTML = shotsHtml;
 
-  // reviews 
   var reviews = document.getElementById("detail-reviews");
   var sample = [
-    { name: "Alex", text: "Really fun gameplay loop and great pacing. Worth it!" },
-    { name: "Sam", text: "Graphics look awesome and the controls feel smooth." },
-    { name: "Jordan", text: "Solid game for the price. Would recommend to friends." }
+    { name: "Menal", text: "Really fun games and great pacing. Worth it!" },
+    { name: "Kulsoom", text: "Fun Fun and look awesome!!" },
+    { name: "Nura", text: "Solid game for the price. Would recommend to friends." }
   ];
   var reviewsHtml = "";
   for (var r = 0; r < sample.length; r++) {
@@ -295,14 +296,12 @@ shots.innerHTML = shotsHtml;
   }
   reviews.innerHTML = reviewsHtml;
 
-  // wire buttons
   var cartBtn = document.getElementById("detail-add-cart-btn");
   var wishBtn = document.getElementById("detail-add-wish-btn");
 
   cartBtn.onclick = function() { addToCart(game.id); };
   wishBtn.onclick = function() { addToWishlist(game.id); };
 
-  // navigate to detail page
   showPage("gamedetailpage");
 }
 
@@ -312,7 +311,6 @@ function setDetailMainImage(src, title) {
   mainImg.alt = title;
 }
 
-// helper to safely embed titles with quotes in onclick strings
 function escapeQuotes(str) {
   return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
@@ -339,9 +337,9 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
   emailInput.value = "";
 });
 
+//---------------------------- Wishlist Page ----------------------------------------------------------------//
 
 
-// WISHLIST PAGE FUNCTIONS 
 var wishlistItems = [];
 function loadWishlist() {
   try {
@@ -473,9 +471,10 @@ function moveToCart(gameId) {
     }
 }
 
-/* CART */
+//---------------------------- Cart Page----------------------------------------------------------------//
 
-var cartItems = []; // [{id, qty}]
+
+var cartItems = [];
 
 function loadCart() {
   try {
@@ -632,12 +631,12 @@ function displayCart() {
   if (taxEl) taxEl.innerHTML = money(totals.tax);
   if (totEl) totEl.innerHTML = money(totals.total);
 
-  // also keep checkout total updated
   var checkoutTotal = document.getElementById("checkout-total-display");
   if (checkoutTotal) checkoutTotal.innerHTML = money(totals.total);
 }
 
-// GAMES PAGE FUNCTIONS 
+//---------------------------- Game Page ----------------------------------------------------------------//
+
 
 function applyFiltersAndSort() {
     var categoryFilter = document.getElementById('category-filter');
@@ -701,8 +700,8 @@ function applyFiltersAndSort() {
     }
     if (maxPrice !== '') {
         var price = 0;
-        // Convert string to number
-        for (var p = 0; p < maxPrice.length; p++) {
+
+      for (var p = 0; p < maxPrice.length; p++) {
             var digit = maxPrice.charAt(p);
             if (digit >= '0' && digit <= '9') {
                 price = price * 10 + (digit.charCodeAt(0) - 48);
@@ -837,7 +836,8 @@ function displayGamesInContainer(gamesToShow) {
         for (var i = 0; i < gamesToShow.length; i++) {
             var game = gamesToShow[i];
             html = html + '<div class="game-card">';
-            html = html + '<img src="' + game.image + '" alt="' + game.title + '" style="cursor:pointer" onclick="openGameDetail(' + game.id + ')">';            html = html + '<div class="game-info">';
+            html = html + '<img src="' + game.image + '" alt="' + game.title + '" style="cursor:pointer" onclick="openGameDetail(' + game.id + ')">';       
+            html = html + '<div class="game-info">';
             html = html + '<h3 style="cursor:pointer" onclick="openGameDetail(' + game.id + ')">' + game.title + '</h3>';
             html = html + '<p class="rating">Rating: ' + game.rating + ' ★</p>';
             html = html + '<p class="category">' + game.category + ' | ' + game.platform + '</p>';
@@ -869,7 +869,9 @@ function setView(viewType) {
         gridBtn.className = 'view-btn';
     }
 }
-// ABOUT PAGE FUNCTIONS
+
+//----------------------------About Page ----------------------------------------------------------------//
+
 function validateContactForm(event) {
     if (event) {
         event.preventDefault();
@@ -927,7 +929,8 @@ function validateContactForm(event) {
     
     return false;}
 
-  // CHECKOUT PAGE FUNCTIONS
+//---------------------------- Checkout page----------------------------------------------------------------//
+
 function validatePaymentForm(event) {
     event.preventDefault();
     
@@ -1056,15 +1059,17 @@ function validatePaymentForm(event) {
     return false;
 }
 
+
+//---------------------------- Receipt page----------------------------------------------------------------//
+
 function processPayment() {
-  // Show loading spinner
+
   var spinner = document.getElementById('loading-spinner');
   if (spinner) spinner.className = 'loading-spinner';
 
   setTimeout(function() {
     if (spinner) spinner.className = 'loading-spinner hidden';
 
-    // Build order number: ORD-YYYYMMDD-####
     var date = new Date();
     var yyyy = date.getFullYear();
     var mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -1072,26 +1077,20 @@ function processPayment() {
     var rand4 = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
     var orderNumber = 'ORD-' + yyyy + mm + dd + '-' + rand4;
 
-    // Order date: DD/MM/YYYY
     var orderDate = dd + '/' + mm + '/' + yyyy;
 
     var email = document.getElementById('checkout-email').value;
 
-    // totals from YOUR cart structure: [{id, qty}]
     var subtotal = calculateCartSubtotal();
     var tax = subtotal * 0.13;
     var total = subtotal + tax;
 
-    // Fill receipt page
-    renderReceipt(orderNumber, orderDate, email, subtotal, tax, total);
+    getReceipt(orderNumber, orderDate, email, subtotal, tax, total);
 
-    // Clear cart after successful checkout
     clearCart();
 
-    // Go to receipt page
     showPage('receiptpage');
 
-    // Reset the form
     var form = document.getElementById('paymentForm');
     if (form) form.reset();
 
@@ -1110,7 +1109,7 @@ function calculateCartSubtotal() {
   return subtotal;
 }
 
-function renderReceipt(orderNumber, orderDate, email, subtotal, tax, total) {
+function getReceipt(orderNumber, orderDate, email, subtotal, tax, total) {
   document.getElementById('r-order-number').textContent = orderNumber;
   document.getElementById('r-order-date').textContent = orderDate;
   document.getElementById('r-email').textContent = email;
@@ -1118,7 +1117,6 @@ function renderReceipt(orderNumber, orderDate, email, subtotal, tax, total) {
   var itemsContainer = document.getElementById('r-items');
   itemsContainer.innerHTML = '';
 
-  // cartItems is: [{id, qty}]
   for (var i = 0; i < cartItems.length; i++) {
     var it = cartItems[i];
     var game = findGameById(it.id);
@@ -1146,7 +1144,6 @@ function clearCart() {
   updateCartBadge();
   displayCart();
 
-  // keep checkout total updated too
   var checkoutTotal = document.getElementById("checkout-total-display");
   if (checkoutTotal) checkoutTotal.innerHTML = "$0.00";
 }
