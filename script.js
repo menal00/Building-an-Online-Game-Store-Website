@@ -41,7 +41,13 @@ const games = [
     description: "An epic AFK idle RPG adventure.",
     image: "images/home1.png",
     releaseDate: "2022-03-15",
-    recommended: true
+    recommended: true,
+    screenshots: [
+    "images/game1_1.jpg",
+    "images/game1_2.jpeg",
+    "images/game1_3.png",
+    "images/game1_4.jpg"
+  ]
   },
   {
     id: 2,
@@ -213,16 +219,22 @@ function openGameDetail(gameId) {
   }
   thumbs.innerHTML = thumbsHtml;
 
-  // screenshots (4 distinct via filters)
-  var shots = document.getElementById("detail-screenshots");
-  var shotsHtml = "";
-  for (var s = 0; s < 4; s++) {
+// screenshots (real images)
+var shots = document.getElementById("detail-screenshots");
+var shotsHtml = "";
+
+if (game.screenshots && game.screenshots.length > 0) {
+  for (var s = 0; s < game.screenshots.length; s++) {
     shotsHtml +=
-      '<div class="screen ' + thumbClasses[s] + '">' +
-      '<img src="' + game.image + '" alt="screenshot ' + (s + 1) + '">' +
+      '<div class="screen">' +
+      '<img src="' + game.screenshots[s] + '" alt="screenshot ' + (s + 1) + '">' +
       "</div>";
   }
-  shots.innerHTML = shotsHtml;
+} else {
+  shotsHtml = "<p>No screenshots available.</p>";
+}
+
+shots.innerHTML = shotsHtml;
 
   // reviews (fake)
   var reviews = document.getElementById("detail-reviews");
