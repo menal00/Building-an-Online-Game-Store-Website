@@ -449,9 +449,7 @@ function moveToCart(gameId) {
     }
 }
 
-/* =========================
-   CART (Rubric-required)
-========================= */
+/* CART */
 
 var cartItems = []; // [{id, qty}]
 
