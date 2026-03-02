@@ -211,7 +211,7 @@ function openGameDetail(gameId) {
   }
   if (!game) return;
 
-  // text/specs
+  // text
   document.getElementById("detail-title").textContent = game.title;
   document.getElementById("detail-description").textContent = game.description;
   document.getElementById("detail-category").textContent = game.category;
@@ -254,7 +254,7 @@ if (game.screenshots && game.screenshots.length > 0) {
 
 shots.innerHTML = shotsHtml;
 
-  // reviews (fake)
+  // reviews 
   var reviews = document.getElementById("detail-reviews");
   var sample = [
     { name: "Alex", text: "Really fun gameplay loop and great pacing. Worth it!" },
