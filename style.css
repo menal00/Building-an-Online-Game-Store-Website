@@ -647,6 +647,7 @@ transition: background 0.5s;
     color: #8a8f9f;
     font-size: 1.2em;
     border: 1px solid #2a2f3f;
+}
 
   .cart-container{
   display: grid;
