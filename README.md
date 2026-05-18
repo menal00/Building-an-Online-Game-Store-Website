@@ -31,7 +31,7 @@ Building-an-Online-Game-Store-Website/
 -   images/
 
  
-** How to Run ** 
+## How to Run 
 
 1. Download or clone the repository:
 2. git clone https://github.com/menal00/Building-an-Online-Game-Store-Website.git
